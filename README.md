@@ -10,5 +10,5 @@
 В проекте использованы языки разметки html5 и css3, а также язык javaScript. Проект предназначен для браузеров на движке webkit, а так же для браузера mozilla firefox.
 
 ## Ссылка на проект ##
-
+https://danyaliupinin.github.io/mesto/
 
