@@ -1,9 +1,14 @@
 .popup__content {
+   display: -webkit-box;
+   display: -ms-flexbox;
    display: flex;
-   flex-direction: column;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+       -ms-flex-direction: column;
+           flex-direction: column;
    background-color: white;
    width: 430px;
-   height: 330px;
+   min-height: 330px;
    border-radius: 10px;
    position: relative;
 }
@@ -17,6 +22,6 @@
 @media (max-width: 620px) {
    .popup__content {
       width: 282px;
-      height: 322px;
+      min-height: 322px;
    }
 }

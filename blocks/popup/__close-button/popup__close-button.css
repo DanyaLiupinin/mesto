@@ -1,7 +1,7 @@
 .popup__close-button {
    width: 32px;
    height: 32px;
-   background-image: url(../../../images/popup__close-button.png);
+   background-image: url(../../../images/close-button.svg);
    background-color: transparent;
    background-repeat: no-repeat;
    background-size: contain;
@@ -12,6 +12,8 @@
    border: none;
    padding: 0;
    cursor: pointer;
+   -webkit-transition: 0.3s ease-in-out;
+   -o-transition: 0.3s ease-in-out;
    transition: 0.3s ease-in-out;
 }
 

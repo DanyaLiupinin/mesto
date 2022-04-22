@@ -4,75 +4,74 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Mesto</title>
+   <title>Место</title>
    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
    <div class="page__container">
       <header class="header">
-         <div class="header__logo"></div>
+         <a href="/"><div class="header__logo"></div></a>
       </header>
       <main class="content">
          <section class="profile">
-            <div class="profile__avatar"></div>
+            <div class="profile__avatar" style="background-image: url(./images/profile__avatar.jpg);"></div>
             <div class="profile__info">
-               <p class="profile__name">Жак-Ив Кусто</p>
+               <h1 class="profile__name">Жак-Ив Кусто</h1>
+               <button type="button" class="profile__edit-button" aria-label="edit-profile"></button>
                <p class="profile__description">Исследователь океана</p>
             </div>
-            <img class="profile__edit-button" src="./images/profile__editbutton.svg" alt="тут должна была быть кнопочка">
-            <div class="profile__add-button"></div>
-            <!--<img class="profile__add-button" src="./images/profile__add-button.svg" src="тут должна была быть кнопочка">-->
+            <button type="button" class="profile__add-button" aria-label="add-photo"></button>
          </section>
          <!-- ELEMENTS -->
          <section class="elements">
             <!-- CARD 1 -->
-            <div class="elements__element">
+            <article class="element">
                <img class="elements__photo" src="./images/element5.jpg" alt="тут должно быть море">
                <div class="elements__info">
-                  <p class="elements__title">Северное море</p>
-                  <div class="elements__like"></div>
+                  <h2 class="elements__title">Северное море</h2>
+                  <button type="button" class="elements__like" aria-label="like-photo"></button>
                </div>
-            </div>
+            </article>
             <!-- CARD 2 -->
-            <div class="elements__element">
+            <article class="element">
                <img class="elements__photo" src="./images/element6.jpg" alt="тут должно быть Балтийское море">
                <div class="elements__info">
-                  <p class="elements__title">Балтийское море</p>
-                  <div class="elements__like"></div>
+                  <h2 class="elements__title">Балтийское море</h2>
+                  <button type="button" class="elements__like" aria-label="like-photo"></button>
                </div>
-            </div>
+            </article>
             <!-- CARD 3 -->
-            <div class="elements__element">
+            <article class="element">
                <img class="elements__photo" src="./images/element4.jpg" alt="тут средиземное море">
                <div class="elements__info">
-                  <p class="elements__title">Средиземное море</p>
-                  <div class="elements__like"></div>
+                  <h2 class="elements__title">Средиземное море</h2>
+                  <button type="button" class="elements__like" aria-label="like-photo"></button>
                </div>
-            </div>
+            </article>
             <!-- CARD 4 -->
-            <div class="elements__element">
+            <article class="element">
                <img class="elements__photo" src="./images/element2.jpg" alt="тут должно быть мраморное море">
                <div class="elements__info">
-                  <p class="elements__title">Мраморное море</p>
-                  <div class="elements__like"></div>
+                  <h2 class="elements__title">Мраморное море</h2>
+                  <button type="button" class="elements__like" aria-label="like-photo"></button>
                </div>
-            </div>
+            </article>
             <!-- CARD 5 -->
-            <div class="elements__element">
+            <article class="element">
                <img class="elements__photo" src="./images/element3.jpg" alt="тут должно быть море Саву">
                <div class="elements__info">
-                  <p class="elements__title">Море Саву</p>
-                  <div class="elements__like"></div>
+                  <h2 class="elements__title">Море Саву</h2>
+                  <button type="button" class="elements__like" aria-label="like-photo"></button>
                </div>
-            </div>
+            </article>
             <!-- CARD 6 -->
-            <div class="elements__element">
+            <article class="element">
                <img class="elements__photo" src="./images/element1.jpg" alt="тут красное море">
                <div class="elements__info">
-                  <p class="elements__title">Красное море</p>
-                  <div class="elements__like"></div>
+                  <h2 class="elements__title">Красное море</h2>
+                  <button type="button" class="elements__like" aria-label="like-photo"></button>
                </div>
-            </div>
+            </article>
          </section>
       </main>
       <footer class="footer">
@@ -80,14 +79,12 @@
       </footer>
       <div class="popup">
          <div class="popup__content">
-            <button class="popup__close-button"></button>
-            <p class="popup__title">Редактировать проифль</p>
-            <form class="popup__form" action="#" method="post">
-               <fieldset class="popup__user-info">
-                  <input class="popup__input popup__input_name" type="text" value="Жак-Ив Кусто">
-                  <input class="popup__input popup__input_description" type="text" value="Исследователь океана">
-                  <button type="button" class="popup__submit-button">Сохранить</button>
-               </fieldset>
+            <button type="button" class="popup__close-button" aria-label="close-popup"></button>
+            <h2 class="popup__title">Редактировать проифль</h2>
+            <form class="popup__form" name="edit-profile" action="#" method="post">
+               <input class="popup__input popup__input_content_name" name="username" type="text" value="Жак-Ив Кусто">
+               <input class="popup__input popup__input_content_description" name="userdescription" type="text" value="Исследователь океана">
+               <button type="submit" class="popup__submit-button">Сохранить</button>
             </form>
          </div>
       </div>

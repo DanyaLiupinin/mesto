@@ -4,6 +4,12 @@
    background-repeat: no-repeat;
    width: 142px;
    height: 33px;
+   display: inline-block;
+   transition: 0.3s ease-in-out;
+}
+
+.header__logo:hover {
+   opacity: 0.8;
 }
 
 @media (max-width: 620px) {
