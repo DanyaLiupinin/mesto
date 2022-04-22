@@ -10,7 +10,6 @@
       text-overflow: ellipsis;
    white-space: nowrap;
    overflow: hidden;
-   display: inline-block;
 }
 
 @media (max-width: 961px) {

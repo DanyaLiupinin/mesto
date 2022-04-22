@@ -13,7 +13,7 @@
    background-color: currentColor;
    background-size: contain;
    border: none;
-   padding: 30px 0 0;
+   padding: 32px 0 0;
    background-repeat: no-repeat;
 }
 
@@ -31,7 +31,7 @@
 
 @media (max-width: 620px) {
    .profile__edit-button {
-      padding-top: 23px;
+      padding-top: 25px;
       margin-left: 10px;
    }
 }
