@@ -4,7 +4,7 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const popupCloseButton = popup.querySelector('.popup__close-button');
 
-let profileName = document.querySelector('.profile__name');
+let profileName = document.querySelector('.profile__title');
 let profileDescription = document.querySelector('.profile__description');
 let inputName = popup.querySelector('.popup__input_content_name');
 let inputDescription = popup.querySelector('.popup__input_content_description');
@@ -28,10 +28,10 @@ popupCloseButton.addEventListener('click', popupOpen);
 
 /* сохранение данных в профиле */
 
-const ProfileForm = popup.querySelector('.popup__form');
+const profileForm = popup.querySelector('.popup__form');
 
 
-ProfileForm.addEventListener('submit', saveProfileInfo);
+profileForm.addEventListener('submit', saveProfileInfo);
 
 function saveProfileInfo (form) {
    form.preventDefault();
