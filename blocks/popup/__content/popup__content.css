@@ -7,21 +7,5 @@
        -ms-flex-direction: column;
            flex-direction: column;
    background-color: white;
-   width: 430px;
-   min-height: 330px;
-   border-radius: 10px;
    position: relative;
-}
-
-@media (max-width: 960px) {
-   .popup__content {
-      width: 350px;
-   }
-}
-
-@media (max-width: 620px) {
-   .popup__content {
-      width: 282px;
-      min-height: 322px;
-   }
 }

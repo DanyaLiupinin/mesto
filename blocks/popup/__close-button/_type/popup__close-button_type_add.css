@@ -1,0 +1,12 @@
+.popup__close-button_type_add {
+   position: absolute;
+   top: -40px;
+   right: -40px;
+}
+
+@media (max-width: 620px) {
+   .popup__close-button_type_add {
+      right: 0;
+      top: -36px;
+   }
+}

@@ -5,9 +5,6 @@
    background-color: transparent;
    background-repeat: no-repeat;
    background-size: contain;
-   position: absolute;
-   top: -40px;
-   right: -40px;
    display: block;
    border: none;
    padding: 0;
@@ -21,11 +18,10 @@
    opacity: .6;
 }
 
+
 @media (max-width: 620px) {
    .popup__close-button {
       width: 20px;
       height: 20px;
-      right: 0;
-      top: -36px;
    }
 }
