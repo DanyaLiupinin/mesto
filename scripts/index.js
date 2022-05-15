@@ -120,7 +120,7 @@ function openPhoto (event) {
   photo.src = event.currentTarget.src 
   const card = event.target.closest('.element')
   photoTitle.textContent = card.textContent
-
+  photo.alt = card.textContent
 }
 
  /* генерация карточек */
@@ -133,6 +133,7 @@ function openPhoto (event) {
 
   newCardTitle.textContent = card.name
   newCardPhoto.src = card.link
+  newCardPhoto.alt = card.name
 
   const deleteCardButton = newCard.querySelector('.element__delete');
   deleteCardButton.addEventListener('click', deleteCard);
