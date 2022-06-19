@@ -18,10 +18,6 @@
    color: black;
 }
 
-.popup__submit-button:hover {
-   opacity: .8;
-}
-
 @media (max-width: 960px) {
    .popup__submit-button {
       width: 290px;

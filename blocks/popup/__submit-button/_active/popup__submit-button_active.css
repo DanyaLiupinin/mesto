@@ -4,3 +4,7 @@
    color: white;
    opacity: 1;
 }
+
+.popup__submit-button_active:hover {
+   opacity: .8;
+}
