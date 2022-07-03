@@ -22,6 +22,8 @@ const inputLink = formAddCard.querySelector('.popup__input_content_link');
 
 const formProfile = popupEdit.querySelector('.popup__form_type_edit');
 
+ const cardsContainer = document.querySelector('.elements');
+
 /* функция открытия попапов */
 
 function openPopup (popupElement) {
@@ -122,37 +124,23 @@ const cards = [
    }
  ]; 
 
- /* тэмплэйт */
+ /* тэмплэйт 
 
  const cardTemplate = document.querySelector('#card-template').content.querySelector('.element')
 
- /* контейнер с карточками */
 
- const cardsContainer = document.querySelector('.elements');
 
- /* удаление карточки */
-
- function deleteCard (evt) {
-  evt.target.closest('.element').remove();
- }
-
-/* лайк */ 
-
-function likeCard (event) {
-  event.target.classList.toggle('element__like_active');
-}
 
 /* открытие попапа type_photo */
 
-function openPhoto (event) {
+function openPhoto (link, name) {
   openPopup (popupPhoto);
-  photo.src = event.currentTarget.src 
-  const card = event.target.closest('.element')
-  photoTitle.textContent = card.textContent
-  photo.alt = card.textContent
+  photo.src = link
+  photo.alt = name
 }
 
- /* генерация карточек */
+
+ /* генерация карточек *
 
  function generateCard (card) {
   const newCard = cardTemplate.cloneNode(true);
@@ -175,7 +163,7 @@ function openPhoto (event) {
   return newCard
  }
 
-/* отрисовка карточек на странице */
+/* отрисовка карточек на странице *
 
 function renderCard (card) {
   cardsContainer.prepend(generateCard(card))  
@@ -197,6 +185,8 @@ function addCard (event) {
     closePopup(popupAdd);
 
     formAddCard.reset()
+
+    // обратиться к классу?  
 }
 
 ////////////////
@@ -221,9 +211,91 @@ function pressEscapeHandler (evt) {
 
   const popup = document.querySelector('.popup_opened')
 
+  // в конст лучше пробежаться по массиву попапов методом find 
+
    closePopup (popup) 
   }
 }
 
 
+///// класс card 
 
+class Card {
+  constructor (data, selector) {
+    this._name = data.name
+    this._link = data.link
+    this._template = selector
+  }
+
+  _getTemplate() {
+    
+    const cardElement = document
+    .querySelector('#card-template')
+    .content
+    .querySelector('.element')
+    .cloneNode(true)
+
+    return cardElement
+  }
+
+  generateCard() {
+
+    this._element = this._getTemplate()
+    this._photo = this._element.querySelector('.element__photo')
+    this._elementLike = this._element.querySelector('.element__like')
+
+    this._photo.src = this._link
+    this._photo.alt = this._name
+    this._element.querySelector('.element__title').textContent = this._name
+    
+
+    this._setEventListeners()
+
+    return this._element
+  }
+
+  _like () {
+
+    this._elementLike
+    .classList
+    .toggle('element__like_active')
+  }
+
+  _delete () {
+    this._element
+    .closest('.element')
+    .remove()
+  }
+
+  _setEventListeners() {
+
+    this._element.querySelector('.element__like').addEventListener('click', () => {
+      this._like()
+    })
+
+    this._element.querySelector('.element__delete').addEventListener('click', () => {
+      this._delete()
+    })
+
+    
+    this._photo.addEventListener('click', () => {
+      openPhoto(this._link, this._name)
+    })
+     //разобраться с самой функцией
+  }
+
+}
+
+
+
+cards.forEach((item) => {
+
+  const card = new Card (item, '#card-template')
+
+  const cardElement = card.generateCard()
+
+  cardsContainer.prepend(cardElement)
+
+})
+
+// СДЕЛАТЬ ОТДЕЛЬНУЮ ВЕТКУ ДЛЯ ТЕКУЩИХ ИЗМЕНЕНИЙ, ОТДЕЛИТЬ ЕЁ ОТ МЭЙНА 
