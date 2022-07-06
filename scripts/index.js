@@ -1,3 +1,15 @@
+import { Card } from './Card.js' 
+import { FormValidator } from './FormValidator.js'
+
+const validateConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  activeButtonClass: 'popup__submit-button_active', 
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_activated'
+}
+
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
 
@@ -7,7 +19,7 @@ const popupAdd = document.querySelector('.popup_type_add');
 const popupPhoto = document.querySelector('.popup_type_photo');
 
 const photo = popupPhoto.querySelector('.popup__photo')
-const photoTitle = popupPhoto.querySelector('.popup__description')
+//const photoTitle = popupPhoto.querySelector('.popup__description')
 
 const buttonsClose = document.querySelectorAll('.popup__close-button');
 
@@ -22,7 +34,11 @@ const inputLink = formAddCard.querySelector('.popup__input_content_link');
 
 const formProfile = popupEdit.querySelector('.popup__form_type_edit');
 
- const cardsContainer = document.querySelector('.elements');
+const cardsContainer = document.querySelector('.elements');
+
+ const validatorFormAddCard = new FormValidator (validateConfig, formAddCard)
+ const validatorFormProfile = new FormValidator (validateConfig, formProfile)
+
 
 /* функция открытия попапов */
 
@@ -42,8 +58,6 @@ function closePopup (popupElement) {
   document.removeEventListener('keydown', pressEscapeHandler)
 }
 
-
-
 buttonsClose.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
@@ -53,14 +67,11 @@ buttonsClose.forEach((button) => {
 
 buttonEditProfile.addEventListener('click', function () {
   openPopup (popupEdit);
-  
-  const inputList = Array.from(formProfile.querySelectorAll('.popup__input'))
-  const submitButton = formProfile.querySelector('.popup__submit-button')
 
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
 
-  toggleButtonState (inputList, submitButton, validateConfig)
+  validatorFormProfile.prevalidation ()
 });
 
 /* открытие попапа type_add */
@@ -69,16 +80,12 @@ buttonAddCard.addEventListener('click', function () {
   
   openPopup (popupAdd);
 
-  const inputList = Array.from(formAddCard.querySelectorAll('.popup__input'))
-  const submitButton = formAddCard.querySelector('.popup__submit-button')
-
   inputCardName.value = ''
   inputLink.value = ''
 
-  toggleButtonState (inputList, submitButton, validateConfig) 
+  validatorFormAddCard.prevalidation ()
   
 });
-
 
 /* сохранение данных из попапа type_edit */
 
@@ -124,13 +131,6 @@ const cards = [
    }
  ]; 
 
- /* тэмплэйт 
-
- const cardTemplate = document.querySelector('#card-template').content.querySelector('.element')
-
-
-
-
 /* открытие попапа type_photo */
 
 function openPhoto (link, name) {
@@ -138,38 +138,6 @@ function openPhoto (link, name) {
   photo.src = link
   photo.alt = name
 }
-
-
- /* генерация карточек *
-
- function generateCard (card) {
-  const newCard = cardTemplate.cloneNode(true);
-
-  const newCardTitle = newCard.querySelector('.element__title');
-  const newCardPhoto = newCard.querySelector('.element__photo');
-
-  newCardTitle.textContent = card.name
-  newCardPhoto.src = card.link
-  newCardPhoto.alt = card.name
-
-  const deleteCardButton = newCard.querySelector('.element__delete');
-  deleteCardButton.addEventListener('click', deleteCard);
-
-  const likeCardButton = newCard.querySelector('.element__like')
-  likeCardButton.addEventListener('click', likeCard)
-  
-  newCardPhoto.addEventListener('click', openPhoto)
-
-  return newCard
- }
-
-/* отрисовка карточек на странице *
-
-function renderCard (card) {
-  cardsContainer.prepend(generateCard(card))  
-}
-
-  cards.forEach(renderCard)
 
 /* добавление новых карточек */
 
@@ -180,13 +148,13 @@ function addCard (event) {
   
   event.preventDefault()
   
-    renderCard ({ name: inputCardName.value, link: inputLink.value });
+    const card = new Card ({ name: inputCardName.value, link: inputLink.value }, '#card-template');
+    const cardElement = card.generateCard()
+    cardsContainer.prepend(cardElement)
 
     closePopup(popupAdd);
 
     formAddCard.reset()
-
-    // обратиться к классу?  
 }
 
 ////////////////
@@ -211,85 +179,14 @@ function pressEscapeHandler (evt) {
 
   const popup = document.querySelector('.popup_opened')
 
-  // в конст лучше пробежаться по массиву попапов методом find 
-
    closePopup (popup) 
   }
 }
 
-
-///// класс card 
-
-class Card {
-  constructor (data, selector) {
-    this._name = data.name
-    this._link = data.link
-    this._template = selector
-  }
-
-  _getTemplate() {
-    
-    const cardElement = document
-    .querySelector('#card-template')
-    .content
-    .querySelector('.element')
-    .cloneNode(true)
-
-    return cardElement
-  }
-
-  generateCard() {
-
-    this._element = this._getTemplate()
-    this._photo = this._element.querySelector('.element__photo')
-    this._elementLike = this._element.querySelector('.element__like')
-
-    this._photo.src = this._link
-    this._photo.alt = this._name
-    this._element.querySelector('.element__title').textContent = this._name
-    
-
-    this._setEventListeners()
-
-    return this._element
-  }
-
-  _like () {
-
-    this._elementLike
-    .classList
-    .toggle('element__like_active')
-  }
-
-  _delete () {
-    this._element
-    .closest('.element')
-    .remove()
-  }
-
-  _setEventListeners() {
-
-    this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._like()
-    })
-
-    this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._delete()
-    })
-
-    
-    this._photo.addEventListener('click', () => {
-      openPhoto(this._link, this._name)
-    })
-     //разобраться с самой функцией
-  }
-
-}
-
-
+// добавление карточек на страницу 
 
 cards.forEach((item) => {
-
+ 
   const card = new Card (item, '#card-template')
 
   const cardElement = card.generateCard()
@@ -298,4 +195,9 @@ cards.forEach((item) => {
 
 })
 
-// СДЕЛАТЬ ОТДЕЛЬНУЮ ВЕТКУ ДЛЯ ТЕКУЩИХ ИЗМЕНЕНИЙ, ОТДЕЛИТЬ ЕЁ ОТ МЭЙНА 
+validatorFormAddCard.enableValidation()
+validatorFormProfile.enableValidation()
+
+
+export { cards, cardsContainer, openPhoto }
+
