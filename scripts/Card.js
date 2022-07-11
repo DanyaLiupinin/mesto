@@ -1,17 +1,15 @@
-import { openPhoto } from './index.js'
-
-
 class Card {
-   constructor (data, selector) {
+   constructor (data, selector, openPhoto) {
      this._name = data.name
      this._link = data.link
      this._template = selector
+     this._openPhoto = openPhoto
    }
  
    _getTemplate() {
      
      const cardElement = document
-     .querySelector('#card-template')
+     .querySelector(this._template)
      .content
      .querySelector('.element')
      .cloneNode(true)
@@ -60,7 +58,7 @@ class Card {
  
      
      this._photo.addEventListener('click', () => {
-       openPhoto(this._link, this._name)
+       this._openPhoto(this._link, this._name)
      })
    }
  

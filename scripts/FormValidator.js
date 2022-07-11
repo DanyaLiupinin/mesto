@@ -71,12 +71,12 @@ class FormValidator {
     this._setEventListeners()
   }
   
-  prevalidation () {
+  prevalidateForm () {
 
     this._inputList.forEach ((inputElement) => 
-    this._hideError (inputElement) &&
-    this._toggleButtonState ()
+    this._hideError (inputElement)
     )
+    this._toggleButtonState ()
 
   }
 }

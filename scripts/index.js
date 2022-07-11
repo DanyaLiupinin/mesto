@@ -19,7 +19,7 @@ const popupAdd = document.querySelector('.popup_type_add');
 const popupPhoto = document.querySelector('.popup_type_photo');
 
 const photo = popupPhoto.querySelector('.popup__photo')
-//const photoTitle = popupPhoto.querySelector('.popup__description')
+const photoTitle = popupPhoto.querySelector('.popup__description')
 
 const buttonsClose = document.querySelectorAll('.popup__close-button');
 
@@ -71,7 +71,7 @@ buttonEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
 
-  validatorFormProfile.prevalidation ()
+  validatorFormProfile.validateForm ()
 });
 
 /* открытие попапа type_add */
@@ -83,7 +83,7 @@ buttonAddCard.addEventListener('click', function () {
   inputCardName.value = ''
   inputLink.value = ''
 
-  validatorFormAddCard.prevalidation ()
+  validatorFormAddCard.validateForm ()
   
 });
 
@@ -137,6 +137,7 @@ function openPhoto (link, name) {
   openPopup (popupPhoto);
   photo.src = link
   photo.alt = name
+  photoTitle.textContent = name
 }
 
 /* добавление новых карточек */
@@ -148,13 +149,19 @@ function addCard (event) {
   
   event.preventDefault()
   
-    const card = new Card ({ name: inputCardName.value, link: inputLink.value }, '#card-template');
-    const cardElement = card.generateCard()
-    cardsContainer.prepend(cardElement)
+    renderCard(createCard())
 
     closePopup(popupAdd);
+}
 
-    formAddCard.reset()
+function createCard () {
+  const card = new Card ({ name: inputCardName.value, link: inputLink.value }, '#card-template');
+  const cardElement = card.generateCard()
+  return cardElement
+}
+
+function renderCard (cardElement) {
+  cardsContainer.prepend(cardElement)
 }
 
 ////////////////
@@ -162,7 +169,7 @@ function addCard (event) {
 // закрытие через оверлей //
 
 popups.forEach((popup) => {
-  popup.addEventListener('click', function (evt) {
+  popup.addEventListener('mousedown', function (evt) {
     if (evt.target === evt.currentTarget) {
       closePopup(popup)
    } else {
@@ -187,7 +194,7 @@ function pressEscapeHandler (evt) {
 
 cards.forEach((item) => {
  
-  const card = new Card (item, '#card-template')
+  const card = new Card (item, '#card-template', openPhoto)
 
   const cardElement = card.generateCard()
 
