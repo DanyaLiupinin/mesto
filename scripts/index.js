@@ -106,28 +106,28 @@ function saveProfileInfo (event) {
 
 const cards = [
    {
-     name: 'Северное море',
-     link: './images/element5.jpg'
+     name: 'я в шоколаде',
+     link: './images/p6.jpg'
    },
    {
-     name: 'Балтийское море',
-     link: './images/element6.jpg'
+     name: 'грызу ногти',
+     link: './images/p3.jpg'
    },
    {
-     name: 'Средиземное море',
-     link: './images/element4.jpg'
+     name: 'с бандой',
+     link: './images/p4.jpg'
    },
    {
-     name: 'Мраморное море',
-     link: './images/element2.jpg'
+     name: 'выношу мусор',
+     link: './images/p5.jpg'
    },
    {
-     name: 'Море Саву',
-     link: './images/element3.jpg'
+     name: 'с пёсей',
+     link: './images/p2.jpg'
    },
    {
-     name: 'Красное море',
-     link: './images/element1.jpg'
+     name: 'я пчёл',
+     link: './images/p1.jpg'
    }
  ]; 
 
@@ -192,6 +192,7 @@ function pressEscapeHandler (evt) {
 
 // добавление карточек на страницу 
 
+/*
 cards.forEach((item) => {
  
   const card = new Card (item, '#card-template', openPhoto)
@@ -201,6 +202,22 @@ cards.forEach((item) => {
   cardsContainer.prepend(cardElement)
 
 })
+*/
+
+const cardList = new Section ({
+  data: cards,
+  renderer: (item) => {
+
+    const card = new Card (item, '#card-template', openPhoto)
+
+    const cardElement = card.generateCard()
+
+    cardsContainer.prepend(cardElement)
+    
+  }
+},
+cardsContainer
+)
 
 validatorFormAddCard.enableValidation()
 validatorFormProfile.enableValidation()
