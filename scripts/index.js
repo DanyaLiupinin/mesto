@@ -1,5 +1,7 @@
 import { Card } from './Card.js' 
 import { FormValidator } from './FormValidator.js'
+import { Section } from './Section.js'
+import { Popup } from './Popup.js'
 
 const validateConfig = {
   formSelector: '.popup__form',
@@ -40,33 +42,34 @@ const cardsContainer = document.querySelector('.elements');
  const validatorFormProfile = new FormValidator (validateConfig, formProfile)
 
 
-/* функция открытия попапов */
-
+// функция открытия попапов //
+/*
 function openPopup (popupElement) {
 
   popupElement.classList.add('popup_opened');
 
   document.addEventListener('keydown', pressEscapeHandler)
 }
-
+*/
 // функция закрытия попапов //
-
+/*
 function closePopup (popupElement) {
 
   popupElement.classList.remove('popup_opened')
 
   document.removeEventListener('keydown', pressEscapeHandler)
 }
-
+*/
+/*
 buttonsClose.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
-
+*/
  /* открытие попапа type_edit */
 
 buttonEditProfile.addEventListener('click', function () {
-  openPopup (popupEdit);
+  openPopup (popupEdit); 
 
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
@@ -114,7 +117,7 @@ const cards = [
      link: './images/p3.jpg'
    },
    {
-     name: 'с бандой',
+     name: 'с пацанами',
      link: './images/p4.jpg'
    },
    {
@@ -135,6 +138,7 @@ const cards = [
 
 function openPhoto (link, name) {
   openPopup (popupPhoto);
+
   photo.src = link
   photo.alt = name
   photoTitle.textContent = name
@@ -167,7 +171,7 @@ function renderCard (cardElement) {
 ////////////////
 
 // закрытие через оверлей //
-
+/*
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', function (evt) {
     if (evt.target === evt.currentTarget) {
@@ -177,9 +181,10 @@ popups.forEach((popup) => {
    }
   })
 })
+*/
 
 // закрытие на escape // 
-
+/*
 function pressEscapeHandler (evt) {
   
   if (evt.key === 'Escape') {
@@ -189,36 +194,26 @@ function pressEscapeHandler (evt) {
    closePopup (popup) 
   }
 }
-
-// добавление карточек на страницу 
-
-/*
-cards.forEach((item) => {
- 
-  const card = new Card (item, '#card-template', openPhoto)
-
-  const cardElement = card.generateCard()
-
-  cardsContainer.prepend(cardElement)
-
-})
 */
+// добавление исходных карточек на страницу 
 
 const cardList = new Section ({
+
   data: cards,
   renderer: (item) => {
 
     const card = new Card (item, '#card-template', openPhoto)
-
     const cardElement = card.generateCard()
+    cardList.addItem(cardElement)
 
-    cardsContainer.prepend(cardElement)
-    
-    
   }
 },
 cardsContainer
 )
+
+cardList.renderItems ()
+
+// включение валидации //
 
 validatorFormAddCard.enableValidation()
 validatorFormProfile.enableValidation()

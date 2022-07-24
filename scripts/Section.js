@@ -1,22 +1,25 @@
-
-import Card from './Card.js'
-
 class Section {
+
     constructor ({data, renderer}, containerSelector) {
 
         this._initialArray = data
         this._renderer = renderer
 
-        this._container = document.querySelector(containerSelector);
+        this._container = containerSelector
     }
 
     renderItems () {
-            this._initialArray.forEach((item) => {
-            this._renderer(item)
-          })
+
+    this._initialArray.forEach(item => {
+    this._renderer (item)
+})
     }
 
-    setItem (element) {
+    
+    addItem (element) {
         this._container.prepend(element)
     }
+    
 }
+
+export { Section }
