@@ -43,30 +43,30 @@ const cardsContainer = document.querySelector('.elements');
 
 
 // функция открытия попапов //
-/*
+
 function openPopup (popupElement) {
 
   popupElement.classList.add('popup_opened');
 
   document.addEventListener('keydown', pressEscapeHandler)
 }
-*/
+
 // функция закрытия попапов //
-/*
+
 function closePopup (popupElement) {
 
   popupElement.classList.remove('popup_opened')
 
   document.removeEventListener('keydown', pressEscapeHandler)
 }
-*/
-/*
+
+
 buttonsClose.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
-*/
- /* открытие попапа type_edit */
+
+ // открытие попапа type_edit 
 
 buttonEditProfile.addEventListener('click', function () {
   openPopup (popupEdit); 
@@ -74,10 +74,10 @@ buttonEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
 
-  validatorFormProfile.validateForm ()
+  validatorFormProfile.prevalidateForm ()
 });
 
-/* открытие попапа type_add */
+// открытие попапа type_add 
 
 buttonAddCard.addEventListener('click', function () {
   
@@ -86,11 +86,23 @@ buttonAddCard.addEventListener('click', function () {
   inputCardName.value = ''
   inputLink.value = ''
 
-  validatorFormAddCard.validateForm ()
+  validatorFormAddCard.prevalidateForm ()
   
 });
 
-/* сохранение данных из попапа type_edit */
+
+// экземпляр попапа для добавления карточек 
+
+/*
+const popupCardAdd = new PopupWithForm ({
+  popupSelector: popupAdd, //или это уже конкретный элемент, а не просто селектор?
+  handleFormSubmit: (formValues) => {
+    const newCard = new Card ({}) // 33 минута продлёнки
+  }
+})
+*/
+
+// сохранение данных из попапа type_edit 
 
 formProfile.addEventListener('submit', saveProfileInfo)
 
@@ -171,7 +183,7 @@ function renderCard (cardElement) {
 ////////////////
 
 // закрытие через оверлей //
-/*
+
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', function (evt) {
     if (evt.target === evt.currentTarget) {
@@ -181,10 +193,10 @@ popups.forEach((popup) => {
    }
   })
 })
-*/
+
 
 // закрытие на escape // 
-/*
+
 function pressEscapeHandler (evt) {
   
   if (evt.key === 'Escape') {
@@ -194,7 +206,7 @@ function pressEscapeHandler (evt) {
    closePopup (popup) 
   }
 }
-*/
+
 // добавление исходных карточек на страницу 
 
 const cardList = new Section ({
