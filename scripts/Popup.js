@@ -1,40 +1,37 @@
 class Popup {
     constructor (popupSelector) {
         this._popup = document.querySelector(popupSelector)
-        this._close = this._popup.querySelector('.popup__close-button')
+        this._closeButton = this._popup.querySelector('.popup__close-button')
     }
 
     open () {
-        this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose)
-        this._popup.addEventListener('mousedown', this._handleOverlayClose)
-        this.setEventListeners() // так??
-
-        /* this._popup.addEventListener('click', this.setEventListeners) */
+        this._popup.classList.add('popup_opened');                                  // открываем попап
+        document.addEventListener('keydown', this._handleEscClose)                 // слушатель нажатия на esc; закрытие попапа
+        this._popup.addEventListener('mousedown', this._handleOverlayClose)       // слушатель нажатия на оверлей; закрытие попапа
     }
 
     close () {
         this._popup.classList.remove('popup_opened')
-        document.removeEventListener('keydown', this._handleEscClose)
-        this._popup.removeEventListener('mousedown', this._handleOverlayClose)
-
-        /* this._popup.removeEventListener('click', this.setEventListeners) */
+        document.removeEventListener('keydown', this._handleEscClose)           // снимаем слушатель esc после закрытия попапа
+        this._popup.removeEventListener('mousedown', this._handleOverlayClose)  // снимаем слушатель оверлея после закрытия попапа
     }
 
-    _handleEscClose (evt) {
+    _handleEscClose = (evt) => {                 // закрытие на esc
         if (evt.key === 'Escape') {
-          this.close() //.bind(this) ??
+          this.close() 
             }
     }
 
-    _handleOverlayClose (evt) {
+    _handleOverlayClose = (evt) => {            // закрытие на оверлей
         if (evt.target === evt.currentTarget) {
             this.close()
     }
     }
 
-    setEventListeners () {
-        this._close.addEventListener('click', this.close.bind(this))
+    setEventListeners() {                      // слушатель клика по крестику и закрытие попапа
+        this._closeButton.addEventListener('click', () => {
+            this.close()
+        })
     }
 }
 

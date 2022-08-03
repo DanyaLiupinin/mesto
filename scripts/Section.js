@@ -2,24 +2,24 @@ class Section {
 
     constructor ({data, renderer}, containerSelector) {
 
-        this._initialArray = data
-        this._renderer = renderer
+        this._initialArray = data // исходный массив с карточками
+        this._renderer = renderer // функция отрисовки элементов 
 
         this._container = containerSelector
     }
-
-    renderItems () {
-
+ 
+    renderItems () { // отрисовываем карточки 
     this._initialArray.forEach(item => {
-    this._renderer (item)
-})
+    this._renderer (item) 
+    })
     }
 
     
-    addItem (element) {
+    addItem (element) { // добавляем на страницу
         this._container.prepend(element)
     }
     
 }
 
 export { Section }
+

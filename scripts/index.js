@@ -1,7 +1,10 @@
 import { Card } from './Card.js' 
 import { FormValidator } from './FormValidator.js'
 import { Section } from './Section.js'
-import { Popup } from './Popup.js'
+//import { Popup } from './Popup.js'
+import { PopupWithForm } from './PopupWithForm.js'
+import { PopupWithImage } from './PopupWithImage.js'
+import { UserInfo } from './UserInfo.js'
 
 const validateConfig = {
   formSelector: '.popup__form',
@@ -42,79 +45,69 @@ const cardsContainer = document.querySelector('.elements');
  const validatorFormProfile = new FormValidator (validateConfig, formProfile)
 
 
-// функция открытия попапов //
+// создание экземпляра userInfo 
 
-function openPopup (popupElement) {
+const userInfo = new UserInfo ({
+  userNameSelector: '.profile__title', // h1 имя пользователя
+  userInfoSelector: '.profile__description' //  p описание пользователя 
+})
 
-  popupElement.classList.add('popup_opened');
+// экземпляр попапа для редактрирования данных 
 
-  document.addEventListener('keydown', pressEscapeHandler)
-}
+const popupUserEdit = new PopupWithForm ({
+  popupSelector: '.popup_type_edit',  
+  handleFormSubmit: (userData) => {
+    userInfo.setUserInfo (userData)
+  }
+})
 
-// функция закрытия попапов //
-
-function closePopup (popupElement) {
-
-  popupElement.classList.remove('popup_opened')
-
-  document.removeEventListener('keydown', pressEscapeHandler)
-}
-
-
-buttonsClose.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
+popupUserEdit.setEventListeners()
 
  // открытие попапа type_edit 
 
-buttonEditProfile.addEventListener('click', function () {
-  openPopup (popupEdit); 
-
-  inputName.value = profileName.textContent;
-  inputDescription.value = profileDescription.textContent;
-
-  validatorFormProfile.prevalidateForm ()
-});
-
-// открытие попапа type_add 
-
-buttonAddCard.addEventListener('click', function () {
+ buttonEditProfile.addEventListener('click', () => {
   
-  openPopup (popupAdd);
+  validatorFormProfile.prevalidateForm()       // при открытии очищаем форму и настраиваем состояние кнопки
+  const userValues = userInfo.getUserInfo()   // собираем данные с шапки страницы чтобы вставить в инпуты попапа
+  inputName.value = userValues.name          // вставляем в инпуты попапа
+  inputDescription.value = userValues.info  // исправить инфо на дэскрипшн
 
-  inputCardName.value = ''
-  inputLink.value = ''
-
-  validatorFormAddCard.prevalidateForm ()
+  popupUserEdit.open() // popupUserEdit - это экземпляр класса PopupWithForm // 
   
-});
+ })
 
 
 // экземпляр попапа для добавления карточек 
 
-/*
 const popupCardAdd = new PopupWithForm ({
-  popupSelector: popupAdd, //или это уже конкретный элемент, а не просто селектор?
-  handleFormSubmit: (formValues) => {
-    const newCard = new Card ({}) // 33 минута продлёнки
+  popupSelector: '.popup_type_add', 
+  handleFormSubmit: (item) => {
+    const newCard = new Card (  // картинки не открываются, в card 3 ий аргумент не такой какой здесь
+    item,   
+    '#card-template',
+    () => {
+      const popupWithImage = new PopupWithImage ('.popup_type_photo')
+      popupWithImage.open({name: item.name, link: item.link})
+    }
+  )
+  const cardElement = newCard.generateCard()
+  cardList.addItem(cardElement)    
   }
+}) 
+
+popupCardAdd.setEventListeners()
+
+
+// открытие попапа для добавления карточек 
+
+buttonAddCard.addEventListener('click', () => {
+
+  popupCardAdd.open()
+  formAddCard.reset()
+  validatorFormAddCard.prevalidateForm()
+
 })
-*/
 
-// сохранение данных из попапа type_edit 
-
-formProfile.addEventListener('submit', saveProfileInfo)
-
-function saveProfileInfo (event) {
-
-  event.preventDefault();
-
-  profileName.textContent = inputName.value; 
-  profileDescription.textContent = inputDescription.value; 
-
-  closePopup(popupEdit);  
-}
 
 
 /* массив карточек в профиле */ 
@@ -146,78 +139,23 @@ const cards = [
    }
  ]; 
 
-/* открытие попапа type_photo */
-
-function openPhoto (link, name) {
-  openPopup (popupPhoto);
-
-  photo.src = link
-  photo.alt = name
-  photoTitle.textContent = name
-}
-
-/* добавление новых карточек */
-
-
-formAddCard.addEventListener('submit', addCard)
-
-function addCard (event) {
-  
-  event.preventDefault()
-  
-    renderCard(createCard())
-
-    closePopup(popupAdd);
-}
-
-function createCard () {
-  const card = new Card ({ name: inputCardName.value, link: inputLink.value }, '#card-template');
-  const cardElement = card.generateCard()
-  return cardElement
-}
-
-function renderCard (cardElement) {
-  cardsContainer.prepend(cardElement)
-}
-
-////////////////
-
-// закрытие через оверлей //
-
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', function (evt) {
-    if (evt.target === evt.currentTarget) {
-      closePopup(popup)
-   } else {
-      return
-   }
-  })
-})
-
-
-// закрытие на escape // 
-
-function pressEscapeHandler (evt) {
-  
-  if (evt.key === 'Escape') {
-
-  const popup = document.querySelector('.popup_opened')
-
-   closePopup (popup) 
-  }
-}
-
-// добавление исходных карточек на страницу 
+// добавление исходных карточек на страницу с помощью класса section
 
 const cardList = new Section ({
 
   data: cards,
   renderer: (item) => {
-
-    const card = new Card (item, '#card-template', openPhoto)
-    const cardElement = card.generateCard()
-    cardList.addItem(cardElement)
-
+  const newCard = new Card (  // картинки не открываются, в card 3 ий аргумент не такой какой здесь
+    item,   
+    '#card-template',
+    () => {
+      const popupWithImage = new PopupWithImage ('.popup_type_photo')
+      popupWithImage.setEventListeners()
+      popupWithImage.open({name: item.name, link: item.link})
+    }
+  )
+    const cardElement = newCard.generateCard()
+    cardList.addItem(cardElement)                               
   }
 },
 cardsContainer
@@ -231,5 +169,5 @@ validatorFormAddCard.enableValidation()
 validatorFormProfile.enableValidation()
 
 
-export { cards, cardsContainer, openPhoto }
+export { cards, cardsContainer }
 

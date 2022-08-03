@@ -1,9 +1,9 @@
 class Card {
-   constructor (data, selector, openPhoto) {
+   constructor (data, selector, handleCardClick) {
      this._name = data.name
      this._link = data.link
      this._template = selector
-     this._openPhoto = openPhoto
+     this._handleCardClick = handleCardClick // логика открытия 
    }
  
    _getTemplate() {
@@ -58,8 +58,8 @@ class Card {
  
      
      this._photo.addEventListener('click', () => {
-       this._openPhoto(this._link, this._name)
-     })
+       this._handleCardClick() //   this._link, this._name
+     }) 
    }
  
  }
