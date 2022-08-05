@@ -1,49 +1,26 @@
-import { Card } from './Card.js' 
-import { FormValidator } from './FormValidator.js'
-import { Section } from './Section.js'
-//import { Popup } from './Popup.js'
-import { PopupWithForm } from './PopupWithForm.js'
-import { PopupWithImage } from './PopupWithImage.js'
-import { UserInfo } from './UserInfo.js'
+import './index.css'
+import { Card } from '../scripts/components/Card.js' 
+import { FormValidator } from '../scripts/components/FormValidator.js'
+import { Section } from '../scripts/components/Section.js'
+import { PopupWithForm } from '../scripts/components/PopupWithForm.js'
+import { PopupWithImage } from '../scripts/components/PopupWithImage.js'
+import { UserInfo } from '../scripts/components/UserInfo.js'
+import {
+  validateConfig,
+  buttonEditProfile,
+  buttonAddCard,
+  inputName, 
+  inputDescription,
+  formAddCard,
+  formProfile,
+  cardsContainer,
+  cards
+} from '../scripts/utils/constants.js'
 
-const validateConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  activeButtonClass: 'popup__submit-button_active', 
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_activated'
-}
-
-const buttonEditProfile = document.querySelector('.profile__edit-button');
-const buttonAddCard = document.querySelector('.profile__add-button');
-
-const popups = document.querySelectorAll('.popup')
-const popupEdit = document.querySelector('.popup_type_edit');
-const popupAdd = document.querySelector('.popup_type_add');
-const popupPhoto = document.querySelector('.popup_type_photo');
-
-const photo = popupPhoto.querySelector('.popup__photo')
-const photoTitle = popupPhoto.querySelector('.popup__description')
-
-const buttonsClose = document.querySelectorAll('.popup__close-button');
-
-const profileName = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__description');
-const inputName = document.querySelector('.popup__input_content_name');
-const inputDescription = document.querySelector('.popup__input_content_description');
-
-const formAddCard = popupAdd.querySelector('.popup__form_type_add');
-const inputCardName = formAddCard.querySelector('.popup__input_content_place');
-const inputLink = formAddCard.querySelector('.popup__input_content_link');
-
-const formProfile = popupEdit.querySelector('.popup__form_type_edit');
-
-const cardsContainer = document.querySelector('.elements');
+// экземпляр валидатора 
 
  const validatorFormAddCard = new FormValidator (validateConfig, formAddCard)
  const validatorFormProfile = new FormValidator (validateConfig, formProfile)
-
 
 // создание экземпляра userInfo 
 
@@ -73,7 +50,7 @@ popupUserEdit.setEventListeners()
   inputDescription.value = userValues.info  // исправить инфо на дэскрипшн
 
   popupUserEdit.open() // popupUserEdit - это экземпляр класса PopupWithForm // 
-  
+
  })
 
 
@@ -101,43 +78,11 @@ popupCardAdd.setEventListeners()
 // открытие попапа для добавления карточек 
 
 buttonAddCard.addEventListener('click', () => {
-
   popupCardAdd.open()
   formAddCard.reset()
   validatorFormAddCard.prevalidateForm()
-
 })
 
-
-
-/* массив карточек в профиле */ 
-
-const cards = [
-   {
-     name: 'я в шоколаде',
-     link: './images/p6.jpg'
-   },
-   {
-     name: 'грызу ногти',
-     link: './images/p3.jpg'
-   },
-   {
-     name: 'с пацанами',
-     link: './images/p4.jpg'
-   },
-   {
-     name: 'выношу мусор',
-     link: './images/p5.jpg'
-   },
-   {
-     name: 'с пёсей',
-     link: './images/p2.jpg'
-   },
-   {
-     name: 'я пчёл',
-     link: './images/p1.jpg'
-   }
- ]; 
 
 // добавление исходных карточек на страницу с помощью класса section
 
@@ -167,7 +112,3 @@ cardList.renderItems ()
 
 validatorFormAddCard.enableValidation()
 validatorFormProfile.enableValidation()
-
-
-export { cards, cardsContainer }
-
