@@ -11,7 +11,7 @@ const addButtonAddaptive = new URL ('../../images/profile__add-button-addaptive.
 const addButton = new URL ('../../images/profile__add-button.svg', import.meta.url)
 const editButton = new URL ('../../images/profile__editbutton.svg', import.meta.url)
 
-const pictures = [
+export const pictures = [
 {name: 'avatar', link: avatar},
 {name: 'closeButton', link: closeButton},
 {name: 'deleteButton', link: deleteButton},
@@ -39,56 +39,47 @@ export const validateConfig = {
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
-
-//const popups = document.querySelectorAll('.popup')
 export const popupEdit = document.querySelector('.popup_type_edit');
 export const popupAdd = document.querySelector('.popup_type_add');
-//export const popupPhoto = document.querySelector('.popup_type_photo');
-
-//const photo = popupPhoto.querySelector('.popup__photo')
-//const photoTitle = popupPhoto.querySelector('.popup__description')
-
-//const buttonsClose = document.querySelectorAll('.popup__close-button');
-
-//const profileName = document.querySelector('.profile__title');
-//const profileDescription = document.querySelector('.profile__description');
 export const inputName = document.querySelector('.popup__input_content_name');
 export const inputDescription = document.querySelector('.popup__input_content_description');
-
 export const formAddCard = popupAdd.querySelector('.popup__form_type_add');
-//const inputCardName = formAddCard.querySelector('.popup__input_content_place');
-//const inputLink = formAddCard.querySelector('.popup__input_content_link');
-
 export const formProfile = popupEdit.querySelector('.popup__form_type_edit');
-
 export const cardsContainer = document.querySelector('.elements');
 
 
 // массив карточек в профиле // 
 
+const imageCardOne = new URL ('../../images/pf.jpg', import.meta.url) //без этого карточки будут добавляться в dist, но не будут отображаться на странице
+const imageCardTwo = new URL ('../../images/ps.jpg', import.meta.url)
+const imageCardThree = new URL ('../../images/p3.jpg', import.meta.url)
+const imageCardFour = new URL ('../../images/p4.jpg', import.meta.url)
+const imageCardFive = new URL ('../../images/p5.jpg', import.meta.url)
+const imageCardSix = new URL ('../../images/p6.jpg', import.meta.url)
+
 export const cards = [
     {
       name: 'я в шоколаде',
-      link: './images/p6.jpg'
+      link: imageCardThree
     },
     {
       name: 'грызу ногти',
-      link: './images/p3.jpg'
+      link: imageCardSix
     },
     {
       name: 'с пацанами',
-      link: './images/p4.jpg'
+      link: imageCardFour
     },
     {
       name: 'выношу мусор',
-      link: './images/p5.jpg'
+      link: imageCardFive
     },
     {
       name: 'с пёсей',
-      link: './images/p2.jpg'
+      link: imageCardTwo
     },
     {
       name: 'я пчёл',
-      link: './images/p1.jpg'
+      link: imageCardOne
     }
   ]; 

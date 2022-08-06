@@ -1,11 +1,5 @@
-import './index.css'
-import { Card } from '../scripts/components/Card.js' 
-import { FormValidator } from '../scripts/components/FormValidator.js'
-import { Section } from '../scripts/components/Section.js'
-import { PopupWithForm } from '../scripts/components/PopupWithForm.js'
-import { PopupWithImage } from '../scripts/components/PopupWithImage.js'
-import { UserInfo } from '../scripts/components/UserInfo.js'
 import {
+  cards,
   validateConfig,
   buttonEditProfile,
   buttonAddCard,
@@ -14,8 +8,15 @@ import {
   formAddCard,
   formProfile,
   cardsContainer,
-  cards
 } from '../scripts/utils/constants.js'
+import './index.css'
+import { Card } from '../scripts/components/Card.js' 
+import { FormValidator } from '../scripts/components/FormValidator.js'
+import { Section } from '../scripts/components/Section.js'
+import { PopupWithForm } from '../scripts/components/PopupWithForm.js'
+import { PopupWithImage } from '../scripts/components/PopupWithImage.js'
+import { UserInfo } from '../scripts/components/UserInfo.js'
+
 
 // экземпляр валидатора 
 
@@ -48,7 +49,6 @@ popupUserEdit.setEventListeners()
   const userValues = userInfo.getUserInfo()   // собираем данные с шапки страницы чтобы вставить в инпуты попапа
   inputName.value = userValues.name          // вставляем в инпуты попапа
   inputDescription.value = userValues.info  // исправить инфо на дэскрипшн
-
   popupUserEdit.open() // popupUserEdit - это экземпляр класса PopupWithForm // 
 
  })
