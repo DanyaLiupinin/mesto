@@ -40,5 +40,3 @@ class PopupWithForm extends Popup {
 }
 
 export { PopupWithForm }
-
-// 1:06:50

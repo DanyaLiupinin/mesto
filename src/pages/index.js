@@ -90,7 +90,7 @@ const cardList = new Section ({
 
   data: cards,
   renderer: (item) => {
-  const newCard = new Card (  // картинки не открываются, в card 3 ий аргумент не такой какой здесь
+  const newCard = new Card ( 
     item,   
     '#card-template',
     () => {

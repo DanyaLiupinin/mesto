@@ -58,7 +58,7 @@ class Card {
  
      
      this._photo.addEventListener('click', () => {
-       this._handleCardClick() //   this._link, this._name
+       this._handleCardClick() 
      }) 
    }
  
