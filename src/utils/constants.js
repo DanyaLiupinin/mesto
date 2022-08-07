@@ -11,19 +11,6 @@ const addButtonAddaptive = new URL ('../images/profile__add-button-addaptive.svg
 const addButton = new URL ('../images/profile__add-button.svg', import.meta.url)
 const editButton = new URL ('../images/profile__editbutton.svg', import.meta.url)
 
-export const pictures = [
-{name: 'avatar', link: avatar},
-{name: 'closeButton', link: closeButton},
-{name: 'deleteButton', link: deleteButton},
-{name: 'headerLogo', link: headerLogo},
-{name: 'likeActive', link: likeActive},
-{name: 'like', link: like},
-{name: 'plus', link: plus},
-{name: 'addButtonAddaptive', link: addButtonAddaptive},
-{name: 'addButton', link: addButton},
-{name: 'editButton', link: editButton}
-]
-
 // конфиг для валидации 
 
 export const validateConfig = {
@@ -45,8 +32,6 @@ export const inputName = document.querySelector('.popup__input_content_name');
 export const inputDescription = document.querySelector('.popup__input_content_description');
 export const formAddCard = popupAdd.querySelector('.popup__form_type_add');
 export const formProfile = popupEdit.querySelector('.popup__form_type_edit');
-export const cardsContainer = document.querySelector('.elements');
-
 
 // массив карточек в профиле // 
 
@@ -59,11 +44,11 @@ const imageCardSix = new URL ('../images/p6.jpg', import.meta.url)
 
 export const cards = [
     {
-      name: 'я в шоколаде',
+      name: 'грызу ногти',
       link: imageCardThree
     },
     {
-      name: 'грызу ногти',
+      name: 'я в шоколаде',
       link: imageCardSix
     },
     {

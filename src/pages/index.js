@@ -6,8 +6,7 @@ import {
   inputName, 
   inputDescription,
   formAddCard,
-  formProfile,
-  cardsContainer,
+  formProfile
 } from '../utils/constants.js'
 import './index.css'
 import { Card } from '../components/Card.js' 
@@ -43,32 +42,26 @@ popupUserEdit.setEventListeners()
 
  // открытие попапа type_edit 
 
- buttonEditProfile.addEventListener('click', () => {
-  
+ buttonEditProfile.addEventListener('click', openPopupEdit)
+
+ function openPopupEdit () {
   validatorFormProfile.prevalidateForm()       // при открытии очищаем форму и настраиваем состояние кнопки
   const userValues = userInfo.getUserInfo()   // собираем данные с шапки страницы чтобы вставить в инпуты попапа
   inputName.value = userValues.name          // вставляем в инпуты попапа
   inputDescription.value = userValues.info  // исправить инфо на дэскрипшн
   popupUserEdit.open() // popupUserEdit - это экземпляр класса PopupWithForm // 
+ }
 
- })
+// экземпляр попапа откытой карточки
 
+const popupWithImage = new PopupWithImage ('.popup_type_photo')
 
 // экземпляр попапа для добавления карточек 
 
 const popupCardAdd = new PopupWithForm ({
   popupSelector: '.popup_type_add', 
   handleFormSubmit: (item) => {
-    const newCard = new Card (  // картинки не открываются, в card 3 ий аргумент не такой какой здесь
-    item,   
-    '#card-template',
-    () => {
-      const popupWithImage = new PopupWithImage ('.popup_type_photo')
-      popupWithImage.open({name: item.name, link: item.link})
-    }
-  )
-  const cardElement = newCard.generateCard()
-  cardList.addItem(cardElement)    
+    cardList.addItem(createCard(item))  
   }
 }) 
 
@@ -77,11 +70,12 @@ popupCardAdd.setEventListeners()
 
 // открытие попапа для добавления карточек 
 
-buttonAddCard.addEventListener('click', () => {
+buttonAddCard.addEventListener('click', openPopupAddCard)
+
+function openPopupAddCard () {
   popupCardAdd.open()
-  formAddCard.reset()
   validatorFormAddCard.prevalidateForm()
-})
+}
 
 
 // добавление исходных карточек на страницу с помощью класса section
@@ -90,23 +84,29 @@ const cardList = new Section ({
 
   data: cards,
   renderer: (item) => {
+    cardList.addItem(createCard(item))                               
+  }
+},
+'.elements'
+)
+
+cardList.renderItems ()
+
+// функция создания карточки 
+
+function createCard (item) {
   const newCard = new Card ( 
     item,   
     '#card-template',
     () => {
-      const popupWithImage = new PopupWithImage ('.popup_type_photo')
       popupWithImage.setEventListeners()
-      popupWithImage.open({name: item.name, link: item.link})
+      popupWithImage.open(item)
     }
   )
-    const cardElement = newCard.generateCard()
-    cardList.addItem(cardElement)                               
-  }
-},
-cardsContainer
-)
+  const cardElement = newCard.generateCard()
+  return cardElement
+}
 
-cardList.renderItems ()
 
 // включение валидации //
 

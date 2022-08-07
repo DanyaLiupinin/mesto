@@ -1,15 +1,15 @@
 import { Popup } from './Popup.js'
 
 class PopupWithForm extends Popup {
-    constructor ({ popupSelector, handleFormSubmit }) { //handleFormSubmit - это то, что происходит при сабмите конкретной формы
+    constructor ({ popupSelector, handleFormSubmit }, dataGetter = null) { //handleFormSubmit - это то, что происходит при сабмите конкретной формы
     super(popupSelector)
     this._handleFormSubmit = handleFormSubmit
     this._form = this._popup.querySelector('.popup__form')
+    this._inputList = Array.from(this._form.querySelectorAll('.popup__input'))
+    this._getData = dataGetter
     }
 
     _getInputValues () {
-
-        this._inputList = this._form.querySelectorAll('.popup__input') // 
         this._formValues = {}
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value 
@@ -33,6 +33,9 @@ class PopupWithForm extends Popup {
     }
 
     close () {
+        this._inputList.forEach(item => {
+            item.value = ""
+        })
         super.close()
     }
 

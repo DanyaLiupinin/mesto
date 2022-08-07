@@ -5,7 +5,7 @@ class Section {
         this._initialArray = data // исходный массив с карточками
         this._renderer = renderer // функция отрисовки элементов 
 
-        this._container = containerSelector
+        this._container = document.querySelector(containerSelector)
     }
  
     renderItems () { // отрисовываем карточки 
