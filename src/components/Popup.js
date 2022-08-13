@@ -7,13 +7,11 @@ class Popup {
     open () {
         this._popup.classList.add('popup_opened');                                  // открываем попап
         document.addEventListener('keydown', this._handleEscClose)                 // слушатель нажатия на esc; закрытие попапа
-        this._popup.addEventListener('mousedown', this._handleOverlayClose)       // слушатель нажатия на оверлей; закрытие попапа
     }
 
     close () {
         this._popup.classList.remove('popup_opened')
         document.removeEventListener('keydown', this._handleEscClose)           // снимаем слушатель esc после закрытия попапа
-        this._popup.removeEventListener('mousedown', this._handleOverlayClose)  // снимаем слушатель оверлея после закрытия попапа
     }
 
     _handleEscClose = (evt) => {                 // закрытие на esc
@@ -32,6 +30,7 @@ class Popup {
         this._closeButton.addEventListener('click', () => {
             this.close()
         })
+        this._popup.addEventListener('mousedown', this._handleOverlayClose)       // слушатель нажатия на оверлей; закрытие попапа
     }
 }
 
