@@ -45,10 +45,10 @@ popupUserEdit.setEventListeners()
  buttonEditProfile.addEventListener('click', openPopupEdit)
 
  function openPopupEdit () {
+  const {name, info} = userInfo.getUserInfo()   // собираем данные с шапки страницы чтобы вставить в инпуты попапа
+  inputName.value = name          // вставляем в инпуты попапа
+  inputDescription.value = info  // исправить инфо на дэскрипшн
   validatorFormProfile.prevalidateForm()       // при открытии очищаем форму и настраиваем состояние кнопки
-  const userValues = userInfo.getUserInfo()   // собираем данные с шапки страницы чтобы вставить в инпуты попапа
-  inputName.value = userValues.name          // вставляем в инпуты попапа
-  inputDescription.value = userValues.info  // исправить инфо на дэскрипшн
   popupUserEdit.open() // popupUserEdit - это экземпляр класса PopupWithForm // 
  }
 
