@@ -55,6 +55,7 @@ popupUserEdit.setEventListeners()
 // экземпляр попапа откытой карточки
 
 const popupWithImage = new PopupWithImage ('.popup_type_photo')
+popupWithImage.setEventListeners()
 
 // экземпляр попапа для добавления карточек 
 
@@ -81,7 +82,6 @@ function openPopupAddCard () {
 // добавление исходных карточек на страницу с помощью класса section
 
 const cardList = new Section ({
-
   data: cards,
   renderer: (item) => {
     cardList.addItem(createCard(item))                               
@@ -99,7 +99,6 @@ function createCard (item) {
     item,   
     '#card-template',
     () => {
-      popupWithImage.setEventListeners()
       popupWithImage.open(item)
     }
   )
