@@ -21,7 +21,7 @@ class Card {
  
      this._element = this._getTemplate()
      this._photo = this._element.querySelector('.element__photo')
-     this._elementLike = this._element.querySelector('.element__like')
+     this._elementLike = this._element.querySelector('.element__like-button')
  
      this._photo.src = this._link
      this._photo.alt = this._name
@@ -37,7 +37,7 @@ class Card {
  
      this._elementLike
      .classList
-     .toggle('element__like_active')
+     .toggle('element__like-button_active')
    }
  
    _delete () {
@@ -47,7 +47,7 @@ class Card {
  
    _setEventListeners() {
  
-     this._element.querySelector('.element__like').addEventListener('click', () => {
+     this._element.querySelector('.element__like-button').addEventListener('click', () => {
        this._like()
      })
  

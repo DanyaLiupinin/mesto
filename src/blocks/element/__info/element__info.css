@@ -14,4 +14,5 @@
        -ms-flex-align: center;
            align-items: center;
    margin: 25px 20px 25px 15px;
+   height: fit-content;
 }

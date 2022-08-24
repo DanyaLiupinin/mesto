@@ -16,6 +16,8 @@ import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
 
+//import { get } from 'core-js/core/dict'
+
 
 // экземпляр валидатора 
 
@@ -111,3 +113,29 @@ function createCard (item) {
 
 validatorFormAddCard.enableValidation()
 validatorFormProfile.enableValidation()
+
+//
+
+// данные о пользователе
+/*
+fetch ('https://nomoreparties.co/v1/cohort-49/users/me', {
+  method: 'GET',
+  headers: {
+    authorization: '' // прописать токен
+  }
+})
+.then((res) => {
+  return res.json()
+})
+.then((data) => {
+  console.log (data)
+})
+*/
+
+// запрос карточек 
+
+/*
+fetch('https://mesto.nomoreparties.co/v1/cohort-49/cards', {
+  method: 'GET'
+})
+*/
