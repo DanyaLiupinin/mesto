@@ -52,7 +52,7 @@ export const cards = [
       link: imageCardSix
     },
     {
-      name: 'с пацанами',
+      name: 'с парнями',
       link: imageCardFour
     },
     {
