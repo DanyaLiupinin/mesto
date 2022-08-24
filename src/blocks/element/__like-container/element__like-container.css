@@ -1,5 +1,6 @@
 .element__like-container {
     height: 36px;
+    max-width: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
