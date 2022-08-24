@@ -1,9 +1,8 @@
 .element__like-button {
    width: 22px;
-   height: 19px;
-   background-image: url(../../../images/like.svg);
+   height: 20px;
+   background: url(../../../images/like.svg) no-repeat center;
    background-size: contain;
-   background-repeat: no-repeat;
    cursor: pointer;
    -webkit-transition: 0.3s ease-in-out;
    -o-transition: 0.3s ease-in-out;

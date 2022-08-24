@@ -3,6 +3,7 @@
    display: -ms-flexbox;
    display: flex;
    max-width: 246px;
+   max-height: 23px;
    -webkit-box-orient: horizontal;
    -webkit-box-direction: normal;
        -ms-flex-direction: row;
@@ -13,6 +14,5 @@
    -webkit-box-align: center;
        -ms-flex-align: center;
            align-items: center;
-   margin: 25px 20px 25px 15px;
-   height: fit-content;
+   margin: 25px 15px 31px 21px;
 }
