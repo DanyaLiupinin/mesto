@@ -36,9 +36,7 @@ const userInfo = new UserInfo ({
 
 const popupUserEdit = new PopupWithForm ({
   popupSelector: '.popup_type_edit',  
-  handleFormSubmit: (userData) => {
-    userInfo.setUserInfo (userData)
-  }
+  handleFormSubmit: editUserInfoHandler
 })
 
 popupUserEdit.setEventListeners()
@@ -142,3 +140,12 @@ api.getUserInfo()
 .catch((err) => {
   console.log(err)
 })
+
+
+
+function editUserInfoHandler() {
+  api.editUserInfo(popupUserEdit.inputValue())
+  .then((data) => {
+    userInfo.setUserInfo(data)
+  })
+}

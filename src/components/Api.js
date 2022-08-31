@@ -26,7 +26,19 @@ getUserInfo() {
 
 //создать метод с res.json чтобы не повторять это в каждой функции
 
-
+editUserInfo(data) {
+  return fetch (`${this._url}/users/me`, {
+    method: 'PATCH',
+    headers: this._headers,
+    body: JSON.stringify({
+      name: data.name,
+      about: data.about
+    })
+  })
+  .then((res) => {
+    return res.json()
+  })
+}
 
 }
 

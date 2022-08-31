@@ -18,6 +18,10 @@ class PopupWithForm extends Popup {
     return this._formValues
     }
 
+    inputValue () {
+        return this._getInputValues()
+    }
+
     setEventListeners = () => {
 
         super.setEventListeners() // обращаемся к методу класса popup, добавляем слушатель на крестик
