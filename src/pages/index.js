@@ -48,7 +48,7 @@ popupUserEdit.setEventListeners()
  function openPopupEdit () {
   const {name, info} = userInfo.getUserInfo()   // собираем данные с шапки страницы чтобы вставить в инпуты попапа
   inputName.value = name          // вставляем в инпуты попапа
-  inputDescription.value = info  // исправить инфо на дэскрипшн
+  inputDescription.value = info  
   validatorFormProfile.prevalidateForm()       // при открытии очищаем форму и настраиваем состояние кнопки
   popupUserEdit.open() // popupUserEdit - это экземпляр класса PopupWithForm // 
  }
@@ -62,13 +62,10 @@ popupWithImage.setEventListeners()
 
 const popupCardAdd = new PopupWithForm ({
   popupSelector: '.popup_type_add', 
-  handleFormSubmit: (item) => {
-    cardList.addItem(createCard(item))  
-  }
+  handleFormSubmit: addCardHandler
 }) 
 
 popupCardAdd.setEventListeners()
-
 
 // открытие попапа для добавления карточек 
 
@@ -124,6 +121,8 @@ const api = new Api({
   }
 }); 
 
+// изначальные карточки 
+
 api.getInitialCards()
 .then((cards) => {
   cardList.renderItems(cards)
@@ -132,6 +131,7 @@ api.getInitialCards()
   console.log(err)
 })
 
+// данные о пользователе 
 
 api.getUserInfo()
 .then((data) => {
@@ -141,11 +141,20 @@ api.getUserInfo()
   console.log(err)
 })
 
-
+// сохранение новых данных о пользователе 
 
 function editUserInfoHandler() {
   api.editUserInfo(popupUserEdit.inputValue())
   .then((data) => {
     userInfo.setUserInfo(data)
+  })
+}
+
+// новая карточка
+
+function addCardHandler(card) {
+  api.addCard(card)
+  .then((item) => {
+    cardList.addItem(createCard(item))
   })
 }
