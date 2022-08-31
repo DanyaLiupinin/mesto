@@ -37,11 +37,11 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form popup__form_type_edit" name="edit-profile" action="#" method="post" novalidate>
                <div class="popup__input-field">
-                  <input class="popup__input popup__input_content_name" id="name" name="username" type="text" value="Том Йорк" required minlength="2" maxlength="40">
+                  <input class="popup__input popup__input_content_name" id="name" name="name" type="text" value="Том Йорк" required minlength="2" maxlength="40">
                   <span class="popup__input-error" id="error-name"></span>
                </div>
                <div class="popup__input-field">
-                  <input class="popup__input popup__input_content_description" id="description" name="userdescription" type="text" value="Моя муза" required minlength="2" maxlength="200">
+                  <input class="popup__input popup__input_content_description" id="description" name="about" type="text" value="Моя муза" required minlength="2" maxlength="200">
                   <span class="popup__input-error" id="error-description"></span>
                </div>
                <button type="submit" class="popup__submit-button" disabled>Сохранить</button>
@@ -81,7 +81,7 @@
                <h2 class="element__title"></h2>
                <div class="element__like-container">
                   <button type="button" class="element__like-button" aria-label="like-photo"></button>
-                  <div class="element__like-amount"></div>
+                  <div class="element__like-amount">1</div>
                </div>
             </div>
          </article>

@@ -15,6 +15,7 @@ import { Section } from '../components/Section.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
+import { Api } from '../components/Api.js'
 
 //import { get } from 'core-js/core/dict'
 
@@ -84,7 +85,6 @@ function openPopupAddCard () {
 // добавление исходных карточек на страницу с помощью класса section
 
 const cardList = new Section ({
-  data: cards,
   renderer: (item) => {
     cardList.addItem(createCard(item))                               
   }
@@ -92,7 +92,7 @@ const cardList = new Section ({
 '.elements'
 )
 
-cardList.renderItems ()
+/*cardList.renderItems (cards)*/ // массив начальных картчоек 
 
 // функция создания карточки 
 
@@ -116,26 +116,29 @@ validatorFormProfile.enableValidation()
 
 //
 
-// данные о пользователе
-/*
-fetch ('https://nomoreparties.co/v1/cohort-49/users/me', {
-  method: 'GET',
+
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-49',
   headers: {
-    authorization: '' // прописать токен
+    authorization: '4e56a87c-a650-4149-b8f7-d810c12124b9',
+    'Content-Type': 'application/json'
   }
+}); 
+
+api.getInitialCards()
+.then((cards) => {
+  cardList.renderItems(cards)
 })
-.then((res) => {
-  return res.json()
+.catch((err) => {
+  console.log(err)
 })
+
+
+api.getUserInfo()
 .then((data) => {
-  console.log (data)
+  userInfo.setUserInfo(data)
 })
-*/
-
-// запрос карточек 
-
-/*
-fetch('https://mesto.nomoreparties.co/v1/cohort-49/cards', {
-  method: 'GET'
+.catch((err) => {
+  console.log(err)
 })
-*/

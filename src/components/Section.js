@@ -1,15 +1,14 @@
 class Section {
 
-    constructor ({data, renderer}, containerSelector) {
+    constructor ({renderer}, containerSelector) {
 
-        this._initialArray = data // исходный массив с карточками
         this._renderer = renderer // функция отрисовки элементов 
 
         this._container = document.querySelector(containerSelector)
     }
  
-    renderItems () { // отрисовываем карточки 
-    this._initialArray.forEach(item => {
+    renderItems (items) { // отрисовываем карточки 
+    items.forEach(item => {
     this._renderer (item) 
     })
     }

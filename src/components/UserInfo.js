@@ -18,8 +18,8 @@ class UserInfo {
     // собираем инфу с инпутов для добавления на страницу
 
     setUserInfo (userData) {
-        this._userName.textContent = userData.username
-        this._userInfo.textContent = userData.userdescription
+        this._userName.textContent = userData.name
+        this._userInfo.textContent = userData.about
     }
 }
 
