@@ -1,6 +1,7 @@
 class Card {
-   constructor (data, selector, {handleCardClick, handleCardLike, handleCardDelete}) {
+   constructor (data, userId, selector, {handleCardClick, handleCardLike, handleCardDelete}) {
     this._ownerId = data.owner._id 
+    this._userId = userId
     this._name = data.name
     this._link = data.link
     this._cardId = data._id
@@ -36,6 +37,11 @@ class Card {
      this._photo.src = this._link
      this._photo.alt = this._name
      this._element.querySelector('.element__title').textContent = this._name
+
+     this._deleteButton = this._element.querySelector('.element__delete')
+     if(this._ownerId !== this._userId) {
+      this._deleteButton.remove()
+     }
      
      this._countLikes = this._element.querySelector('.element__like-amount')
      this.renderLikes()
@@ -63,7 +69,7 @@ class Card {
        this._like()
      })
  
-     this._element.querySelector('.element__delete').addEventListener('click', () => {      
+     this._deleteButton.addEventListener('click', () => {      
       this._handleCardDelete.open(this)
      })
  

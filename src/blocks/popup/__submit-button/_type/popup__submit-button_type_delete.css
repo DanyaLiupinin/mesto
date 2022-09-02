@@ -1,3 +1,9 @@
 .popup__submit-button_type_delete {
     margin-top: 38px;
 }
+
+@media (max-width: 620px) {
+    .popup__submit-button {
+       width: 210px;
+    }
+ }

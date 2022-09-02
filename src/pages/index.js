@@ -96,6 +96,7 @@ const cardList = new Section ({
 function createCard (item) {
   const newCard = new Card ( 
     item,   
+    userId,
     '#card-template', {
       handleCardClick: () => {
       popupWithImage.open(item)
@@ -148,17 +149,19 @@ const api = new Api({
 
 api.getInitialCards()
 .then((cards) => {
-  cardList.renderItems(cards)
+  cardList.renderItems(cards.reverse())
 })
 .catch((err) => {
   console.log(err)
 })
 
 // данные о пользователе 
+let userId = null
 
 api.getUserInfo()
 .then((data) => {
   userInfo.setUserInfo(data)
+  userId = data._id
 })
 .catch((err) => {
   console.log(err)
@@ -181,3 +184,5 @@ function addCardHandler(card) {
     cardList.addItem(createCard(item))
   })
 }
+
+// TODO исправить верстку 
