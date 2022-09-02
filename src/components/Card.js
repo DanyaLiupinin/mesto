@@ -1,9 +1,19 @@
 class Card {
-   constructor (data, selector, handleCardClick) {
-     this._name = data.name
-     this._link = data.link
-     this._template = selector
-     this._handleCardClick = handleCardClick // логика открытия 
+   constructor (data, selector, {handleCardClick, handleCardLike, handleCardDelete}) {
+    this._ownerId = data.owner._id 
+    this._name = data.name
+    this._link = data.link
+    this._cardId = data._id
+    this._likes = data.likes
+    this._template = selector
+    this._handleCardClick = handleCardClick // логика открытия 
+    this._handleCardLike = handleCardLike
+    //this._handleDeleteLike = handleDeleteLike
+
+    this._handleCardDelete = handleCardDelete
+
+    
+    // user id ???
    }
  
    _getTemplate() {
@@ -27,6 +37,8 @@ class Card {
      this._photo.alt = this._name
      this._element.querySelector('.element__title').textContent = this._name
      
+     this._countLikes = this._element.querySelector('.element__like-amount')
+     this.renderLikes()
  
      this._setEventListeners()
  
@@ -40,7 +52,7 @@ class Card {
      .toggle('element__like-button_active')
    }
  
-   _delete () {
+   delete () {
     this._element.remove()
     this._element = null
    }
@@ -51,14 +63,22 @@ class Card {
        this._like()
      })
  
-     this._element.querySelector('.element__delete').addEventListener('click', () => {
-       this._delete()
+     this._element.querySelector('.element__delete').addEventListener('click', () => {      
+      this._handleCardDelete.open(this)
      })
  
      
      this._photo.addEventListener('click', () => {
        this._handleCardClick() 
      }) 
+   }
+
+   getCardId () {
+    return this._cardId
+   }
+
+   renderLikes () {
+    this._countLikes.textContent = this._likes.length
    }
  
  }

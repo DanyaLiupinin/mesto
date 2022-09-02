@@ -54,6 +54,37 @@ addCard (card) {
   })
 }
 
+putLike (cardId) {
+  return fetch (`${this._url}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: this._headers
+  })
+  .then((res) => {
+    return res.json()
+  })
+}
+
+deleteLike (cardId) {
+  return fetch (`${this._url}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: this._headers
+  })
+  .then((res) => {
+    return res.json()
+  })
+}
+
+deleteCard(cardId) {
+  return fetch (`${this._url}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: this._headers
+  })
+  .then((res)=> {
+    res.json()
+  })
+}
+
+
 }
 
 

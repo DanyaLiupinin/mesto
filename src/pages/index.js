@@ -12,10 +12,12 @@ import './index.css'
 import { Card } from '../components/Card.js' 
 import { FormValidator } from '../components/FormValidator.js'
 import { Section } from '../components/Section.js'
+import { Popup } from '../components/Popup.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
+import { PopupConfirm } from '../components/PopupConfirm.js'
 
 //import { get } from 'core-js/core/dict'
 
@@ -94,23 +96,44 @@ const cardList = new Section ({
 function createCard (item) {
   const newCard = new Card ( 
     item,   
-    '#card-template',
-    () => {
+    '#card-template', {
+      handleCardClick: () => {
       popupWithImage.open(item)
-    }
-  )
+    },
+    handleCardLike:   
+// тут что то про постановку лайков 
+    console.log('like'),
+
+    handleCardDelete: popupDeleteCard 
+    
+})
   const cardElement = newCard.generateCard()
   return cardElement
 }
 
+// подтверждение удаления карточки
+
+const popupDeleteCard = new PopupConfirm ('.popup_type_delete', cardDeleteHandler)
+popupDeleteCard.setEventListeners()
+
+function cardDeleteHandler(card) {
+  const cardId = card.getCardId()
+  
+  api.deleteCard(cardId)
+  .then(() => {
+    card.delete()
+    popupDeleteCard.close()
+  
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
 
 // включение валидации //
 
 validatorFormAddCard.enableValidation()
 validatorFormProfile.enableValidation()
-
-//
-
 
 
 const api = new Api({
