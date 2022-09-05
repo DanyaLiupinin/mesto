@@ -1,5 +1,4 @@
 import {
-  cards,
   validateConfig,
   buttonEditProfile,
   buttonAddCard,
@@ -12,7 +11,6 @@ import './index.css'
 import { Card } from '../components/Card.js' 
 import { FormValidator } from '../components/FormValidator.js'
 import { Section } from '../components/Section.js'
-import { Popup } from '../components/Popup.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
@@ -89,8 +87,6 @@ const cardList = new Section ({
 '.elements'
 )
 
-/*cardList.renderItems (cards)*/ // массив начальных картчоек 
-
 // функция создания карточки 
 
 function createCard (item) {
@@ -103,25 +99,28 @@ function createCard (item) {
     },
 
     handleCardLike: 
+
     (card) => {
-      console.log(card.likes())
-      
+
       if (!card.isLiked()) {
         card.like()
         api.putLike(item._id)
+        .then((data) => {
+          card.setLikesInfo(data)
+        })
         .then(() => {
           card.renderLikes()
         })
       } else {
         card.dislike()
         api.deleteLike(item._id)
+        .then((dataa) => {
+          card.setLikesInfo(dataa)
+        })
         .then(() => {
-          card.renderlikes()
+          card.renderLikes()
         })
       } 
-      
-      return console.log(card.likes())
-      
     },
 
     handleCardDelete: popupDeleteCard 

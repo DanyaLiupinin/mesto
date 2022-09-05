@@ -92,14 +92,14 @@ class Card {
     return this._cardId
    }
 
+   setLikesInfo (data) {
+    this._likes = data.likes
+   }
+
   renderLikes() {
     this._countLikes.textContent = this._likes.length
    }
 
-  likes () {
-    return this._likes
-   }
- 
  }
 
  export { Card }
