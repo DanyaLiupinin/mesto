@@ -101,9 +101,23 @@ function createCard (item) {
       handleCardClick: () => {
       popupWithImage.open(item)
     },
-    handleCardLike:   
-// тут что то про постановку лайков 
-    console.log('like'),
+
+    handleCardLike: 
+    (card) => {
+      if (!card.isLiked()) {
+        console.log('work')
+        api.putLike(item._id)
+      .then(() => {
+        card.like() 
+      })
+      } /* else {
+        console.log(card)
+        api.deleteLike(item._id)
+      .then(() => {
+        card.like()
+      })
+      } */
+    },
 
     handleCardDelete: popupDeleteCard 
     
@@ -126,10 +140,11 @@ function cardDeleteHandler(card) {
     popupDeleteCard.close()
   
   })
-  .catch((err) => {
-    console.log(err)
-  })
 }
+
+// постановка лайка
+
+///
 
 // включение валидации //
 

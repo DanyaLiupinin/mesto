@@ -55,7 +55,7 @@ addCard (card) {
 }
 
 putLike (cardId) {
-  return fetch (`${this._url}/cards/likes/${cardId}`, {
+  return fetch (`${this._url}/cards/${cardId}/likes`, {
     method: 'PUT',
     headers: this._headers
   })
@@ -65,7 +65,7 @@ putLike (cardId) {
 }
 
 deleteLike (cardId) {
-  return fetch (`${this._url}/cards/likes/${cardId}`, {
+  return fetch (`${this._url}/cards/${cardId}/likes`, {
     method: 'DELETE',
     headers: this._headers
   })

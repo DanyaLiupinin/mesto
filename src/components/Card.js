@@ -4,17 +4,20 @@ class Card {
     this._userId = userId
     this._name = data.name
     this._link = data.link
+    this._likes = data.likes
     this._cardId = data._id
     this._likes = data.likes
     this._template = selector
     this._handleCardClick = handleCardClick // логика открытия 
     this._handleCardLike = handleCardLike
-    //this._handleDeleteLike = handleDeleteLike
 
     this._handleCardDelete = handleCardDelete
 
-    
-    // user id ???
+   }
+
+   isLiked () {
+    console.log(this._likes)
+    return this._likes.some(like => like._id === this._userId)
    }
  
    _getTemplate() {
@@ -51,7 +54,7 @@ class Card {
      return this._element
    }
  
-   _like () {
+   like () {
  
      this._elementLike
      .classList
@@ -66,7 +69,7 @@ class Card {
    _setEventListeners() {
  
      this._element.querySelector('.element__like-button').addEventListener('click', () => {
-       this._like()
+       this._handleCardLike(this)
      })
  
      this._deleteButton.addEventListener('click', () => {      
