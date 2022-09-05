@@ -16,7 +16,6 @@ class Card {
    }
 
    isLiked () {
-    console.log(this._likes)
     return this._likes.some(like => like._id === this._userId)
    }
  
@@ -36,6 +35,9 @@ class Card {
      this._element = this._getTemplate()
      this._photo = this._element.querySelector('.element__photo')
      this._elementLike = this._element.querySelector('.element__like-button')
+     if (this.isLiked()) {
+      this.like()
+     }
  
      this._photo.src = this._link
      this._photo.alt = this._name
@@ -47,7 +49,7 @@ class Card {
      }
      
      this._countLikes = this._element.querySelector('.element__like-amount')
-     this.renderLikes()
+     this.renderLikes(this._likes)
  
      this._setEventListeners()
  
@@ -55,10 +57,15 @@ class Card {
    }
  
    like () {
- 
      this._elementLike
      .classList
-     .toggle('element__like-button_active')
+     .add('element__like-button_active')
+   }
+
+   dislike () {
+    this._elementLike
+    .classList
+    .remove('element__like-button_active')
    }
  
    delete () {
@@ -76,7 +83,6 @@ class Card {
       this._handleCardDelete.open(this)
      })
  
-     
      this._photo.addEventListener('click', () => {
        this._handleCardClick() 
      }) 
@@ -86,8 +92,12 @@ class Card {
     return this._cardId
    }
 
-   renderLikes () {
+  renderLikes() {
     this._countLikes.textContent = this._likes.length
+   }
+
+  likes () {
+    return this._likes
    }
  
  }

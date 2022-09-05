@@ -104,19 +104,24 @@ function createCard (item) {
 
     handleCardLike: 
     (card) => {
+      console.log(card.likes())
+      
       if (!card.isLiked()) {
-        console.log('work')
-        api.putLike(item._id)
-      .then(() => {
-        card.like() 
-      })
-      } /* else {
-        console.log(card)
-        api.deleteLike(item._id)
-      .then(() => {
         card.like()
-      })
-      } */
+        api.putLike(item._id)
+        .then(() => {
+          card.renderLikes()
+        })
+      } else {
+        card.dislike()
+        api.deleteLike(item._id)
+        .then(() => {
+          card.renderlikes()
+        })
+      } 
+      
+      return console.log(card.likes())
+      
     },
 
     handleCardDelete: popupDeleteCard 
@@ -125,6 +130,7 @@ function createCard (item) {
   const cardElement = newCard.generateCard()
   return cardElement
 }
+
 
 // подтверждение удаления карточки
 
@@ -138,7 +144,6 @@ function cardDeleteHandler(card) {
   .then(() => {
     card.delete()
     popupDeleteCard.close()
-  
   })
 }
 
