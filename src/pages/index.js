@@ -141,10 +141,6 @@ function cardDeleteHandler(card) {
   });
 }
 
-// постановка лайка
-
-///
-
 // включение валидации //
 
 validatorFormAddCard.enableValidation();
