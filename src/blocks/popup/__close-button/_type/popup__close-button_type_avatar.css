@@ -1,0 +1,11 @@
+.popup__close-button_type_avatar {
+    top: -40px;
+    right: -40px;
+}
+
+@media (max-width: 620px) {
+    .popup__close-button_type_avatar {
+       right: 0;
+       top: -36px;
+    }
+ }

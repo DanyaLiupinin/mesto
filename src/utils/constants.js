@@ -26,12 +26,15 @@ export const validateConfig = {
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
+export const buttonEditAvatar = document.querySelector('.profile__avatar')
 export const popupEdit = document.querySelector('.popup_type_edit');
 export const popupAdd = document.querySelector('.popup_type_add');
+export const popupAvatar = document.querySelector('.popup_type_avatar')
 export const inputName = document.querySelector('.popup__input_content_name');
 export const inputDescription = document.querySelector('.popup__input_content_description');
 export const formAddCard = popupAdd.querySelector('.popup__form_type_add');
 export const formProfile = popupEdit.querySelector('.popup__form_type_edit');
+export const formAvatar = popupAvatar.querySelector('.popup__form_type_avatar')
 
 // массив карточек в профиле // 
 

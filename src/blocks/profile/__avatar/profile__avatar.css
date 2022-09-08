@@ -1,13 +1,17 @@
 .profile__avatar {
+   /*width: 120px;
+   height: 120px;
+   border-radius: 50%;
+   cursor: pointer;
+   display: block;
+   */
+   display: block;
    width: 120px;
    height: 120px;
-   background-size: contain;
-   border-radius: 50%;
-   background-repeat: no-repeat;
-   background-image: url(../../../images/avatar.jpg);
    cursor: pointer;
 }
 
+/*
 .profile__avatar::before {
    content: '';
    opacity: 0;
@@ -38,3 +42,4 @@
    background-position: center;
    border-radius: 50%;
 }
+*/

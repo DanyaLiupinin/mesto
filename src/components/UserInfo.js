@@ -1,8 +1,8 @@
 class UserInfo {
-    constructor ({ userNameSelector, userInfoSelector }) {
+    constructor ({ userNameSelector, userInfoSelector, avatarSelector }) {
         this._userName = document.querySelector(userNameSelector)
         this._userInfo = document.querySelector(userInfoSelector)
-        
+        this._avatar = document.querySelector(avatarSelector)
     }
 
     // собирем инфу со страницы для добавления в инпуты
@@ -20,7 +20,13 @@ class UserInfo {
     setUserInfo (userData) {
         this._userName.textContent = userData.name
         this._userInfo.textContent = userData.about
+        this._avatar.src = userData.avatar
     }
 }
 
 export { UserInfo }
+
+// TODO ДОРАЗОБРАТЬСЯ С АВАТАРКОЙ 
+// ПОПРАВИТЬ ВЕРСТКУ АВАТАРКИ
+// ПОПРАВИТЬ ВЕРСТКУ ПОПАПА РЕДАКТИРОВАНИЯ АВАТАРКИ 
+// UX ДИЗАЙН

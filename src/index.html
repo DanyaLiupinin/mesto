@@ -13,7 +13,7 @@
       </header>
       <main class="content">
          <section class="profile">
-            <div class="profile__avatar"></div>
+            <img class="profile__avatar" src="#" alt="Аватар">
             <div class="profile__info">
                <div class="profile__name">
                   <h1 class="profile__title"></h1>
@@ -93,6 +93,20 @@
                <button type="button" class="popup__close-button popup__close-button_type_delete" aria-label="close-popup"></button>
                <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
                <button type="submit" class="popup__submit-button popup__submit-button_active popup__submit-button_type_delete">Да</button>
+            </form>
+         </div>
+      </div>
+
+      <div class="popup popup_type_avatar">
+         <div class="popup__content popup__content_type_avatar">
+            <button type="button" class="popup__close-button popup__close-button_type_avatar" aria-label="close-popup"></button>
+            <h2 class="popup__title popup__title_type_avatar">Обновить аватар?</h2>
+            <form class="popup__form popup__form_type_avatar" name="edit-avatar" action="#" method="post" novalidate>
+               <div class="popup__input-field">
+                  <input class="popup__input popup__input_content_avatar" id="avatar" name="avatar" type="url" placeholder="Ссылка на аватар" value="" required>
+                  <span class="popup__input-error" id="error-avatar">Введите адрес картинки</span> <!-- попробовать обойтись без обертки diva -->
+               </div>
+               <button type="submit" class="popup__submit-button" disabled>Сохранить</button>
             </form>
          </div>
       </div>

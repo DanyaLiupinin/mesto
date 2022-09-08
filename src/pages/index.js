@@ -2,10 +2,12 @@ import {
   validateConfig,
   buttonEditProfile,
   buttonAddCard,
+  buttonEditAvatar,
   inputName,
   inputDescription,
   formAddCard,
   formProfile,
+  formAvatar
 } from "../utils/constants.js";
 import "./index.css";
 import { Card } from "../components/Card.js";
@@ -23,22 +25,57 @@ import { PopupConfirm } from "../components/PopupConfirm.js";
 
 const validatorFormAddCard = new FormValidator(validateConfig, formAddCard);
 const validatorFormProfile = new FormValidator(validateConfig, formProfile);
+const validatorFormAvatar = new FormValidator(validateConfig, formAvatar)
 
 // создание экземпляра userInfo
 
 const userInfo = new UserInfo({
   userNameSelector: ".profile__title", // h1 имя пользователя
   userInfoSelector: ".profile__description", //  p описание пользователя
+  avatarSelector: ".profile__avatar"
 });
+
+// экземпляр попапа редактирования аватара
+
+const popupAvatarEdit = new PopupWithForm({
+  popupSelector: '.popup_type_avatar',
+  handleFormSubmit: editAvatarHandler
+})
+
+function editAvatarHandler () {
+  api.updateAvatar(popupAvatarEdit.inputValue())
+  .then((res) => {
+    console.log(res) // удалить консоль лог
+    userInfo.setUserInfo(res)
+    popupAvatarEdit.close()
+  })
+}
+
+popupAvatarEdit.setEventListeners()
+
+buttonEditAvatar.addEventListener('click', openPopupAvatar)
+
+function openPopupAvatar () {
+  validatorFormAvatar.prevalidateForm()
+  popupAvatarEdit.open()
+}
 
 // экземпляр попапа для редактрирования данных
 
 const popupUserEdit = new PopupWithForm({
   popupSelector: ".popup_type_edit",
-  handleFormSubmit: editUserInfoHandler,
+  handleFormSubmit: editUserInfoHandler
 });
 
 popupUserEdit.setEventListeners();
+
+// сохранение новых данных о пользователе
+
+function editUserInfoHandler() {
+  api.editUserInfo(popupUserEdit.inputValue()).then((data) => {
+    userInfo.setUserInfo(data);
+  });
+}
 
 // открытие попапа type_edit
 
@@ -55,6 +92,7 @@ function openPopupEdit() {
 // экземпляр попапа откытой карточки
 
 const popupWithImage = new PopupWithImage(".popup_type_photo");
+
 popupWithImage.setEventListeners();
 
 // экземпляр попапа для добавления карточек
@@ -109,8 +147,8 @@ function createCard(item) {
         card.dislike();
         api
           .deleteLike(item._id)
-          .then((dataa) => {
-            card.setLikesInfo(dataa);
+          .then((data) => {
+            card.setLikesInfo(data);
           })
           .then(() => {
             card.renderLikes();
@@ -145,6 +183,9 @@ function cardDeleteHandler(card) {
 
 validatorFormAddCard.enableValidation();
 validatorFormProfile.enableValidation();
+validatorFormAvatar.enableValidation();
+
+// создание api
 
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-49",
@@ -177,14 +218,6 @@ api
   .catch((err) => {
     console.log(err);
   });
-
-// сохранение новых данных о пользователе
-
-function editUserInfoHandler() {
-  api.editUserInfo(popupUserEdit.inputValue()).then((data) => {
-    userInfo.setUserInfo(data);
-  });
-}
 
 // новая карточка
 
