@@ -43,6 +43,10 @@ class PopupWithForm extends Popup {
         super.close()
     }
 
+    setTextSubmitButton (text) {
+        this._submitButton = this._form.querySelector('.popup__submit-button')
+        this._submitButton.textContent = text
+    } 
 
 }
 

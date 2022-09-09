@@ -1,6 +1,5 @@
 //картинки из html
 
-const avatar = new URL ('../images/avatar.jpg', import.meta.url)
 const closeButton = new URL ('../images/close-button.svg', import.meta.url)
 const deleteButton = new URL ('../images/delete-button.svg', import.meta.url)
 const headerLogo = new URL ('../images/header__logo.svg', import.meta.url)
@@ -26,7 +25,7 @@ export const validateConfig = {
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
-export const buttonEditAvatar = document.querySelector('.profile__avatar')
+export const buttonEditAvatar = document.querySelector('.profile__avatar-section')
 export const popupEdit = document.querySelector('.popup_type_edit');
 export const popupAdd = document.querySelector('.popup_type_add');
 export const popupAvatar = document.querySelector('.popup_type_avatar')
@@ -35,39 +34,3 @@ export const inputDescription = document.querySelector('.popup__input_content_de
 export const formAddCard = popupAdd.querySelector('.popup__form_type_add');
 export const formProfile = popupEdit.querySelector('.popup__form_type_edit');
 export const formAvatar = popupAvatar.querySelector('.popup__form_type_avatar')
-
-// массив карточек в профиле // 
-
-const imageCardOne = new URL ('../images/pf.jpg', import.meta.url) //без этого карточки будут добавляться в dist, но не будут отображаться на странице
-const imageCardTwo = new URL ('../images/ps.jpg', import.meta.url)
-const imageCardThree = new URL ('../images/p3.jpg', import.meta.url)
-const imageCardFour = new URL ('../images/p4.jpg', import.meta.url)
-const imageCardFive = new URL ('../images/p5.jpg', import.meta.url)
-const imageCardSix = new URL ('../images/p6.jpg', import.meta.url)
-
-export const cards = [
-    {
-      name: 'грызу ногти',
-      link: imageCardThree
-    },
-    {
-      name: 'я в шоколаде',
-      link: imageCardSix
-    },
-    {
-      name: 'с парнями',
-      link: imageCardFour
-    },
-    {
-      name: 'выношу мусор',
-      link: imageCardFive
-    },
-    {
-      name: 'с пёсей',
-      link: imageCardTwo
-    },
-    {
-      name: 'я пчёл',
-      link: imageCardOne
-    }
-  ]; 

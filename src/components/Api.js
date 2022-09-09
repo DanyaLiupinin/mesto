@@ -10,7 +10,7 @@ getInitialCards() {
       headers: this._headers
 })
     .then((res) => {
-  return res.json()
+  return this._checkRes(res)
 })
     }
 
@@ -20,11 +20,9 @@ getUserInfo() {
     headers: this._headers
 })
     .then((res) => {
-    return res.json()
+    return this._checkRes(res)
       })
 }
-
-//создать метод с res.json чтобы не повторять это в каждой функции
 
 editUserInfo(data) {
   return fetch (`${this._url}/users/me`, {
@@ -36,7 +34,7 @@ editUserInfo(data) {
     })
   })
   .then((res) => {
-    return res.json()
+    return this._checkRes(res)
   })
 }
 
@@ -50,7 +48,7 @@ addCard (card) {
     })
   })
   .then ((res) => {
-    return res.json()
+    return this._checkRes(res)
   })
 }
 
@@ -60,7 +58,7 @@ putLike (cardId) {
     headers: this._headers
   })
   .then((res) => {
-    return res.json()
+    return this._checkRes(res)
   })
 }
 
@@ -70,7 +68,7 @@ deleteLike (cardId) {
     headers: this._headers
   })
   .then((res) => {
-    return res.json()
+    return this._checkRes(res)
   })
 }
 
@@ -80,7 +78,7 @@ deleteCard(cardId) {
     headers: this._headers
   })
   .then((res)=> {
-    res.json()
+    return this._checkRes(res)
   })
 }
 
@@ -93,17 +91,18 @@ updateAvatar (data) {
     })
   })
   .then((res) => {
-    return res.json()
+    return this._checkRes(res)
   })
 }
 
-
+_checkRes (res) {
+  if (res.ok) {
+    return res.json()
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-
-
-
-
+}
 
 
 export { Api }
