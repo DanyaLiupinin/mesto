@@ -7,7 +7,7 @@ import {
   inputDescription,
   formAddCard,
   formProfile,
-  formAvatar
+  formAvatar,
 } from "../utils/constants.js";
 import "./index.css";
 import { Card } from "../components/Card.js";
@@ -30,8 +30,8 @@ const validatorFormAvatar = new FormValidator(validateConfig, formAvatar)
 // создание экземпляра userInfo
 
 const userInfo = new UserInfo({
-  userNameSelector: ".profile__title", 
-  userInfoSelector: ".profile__description", 
+  userNameSelector: ".profile__title",
+  userInfoSelector: ".profile__description",
   avatarSelector: ".profile__avatar"
 });
 
@@ -44,24 +44,26 @@ const popupAvatarEdit = new PopupWithForm({
 
 popupAvatarEdit.setEventListeners()
 
-function editAvatarHandler () {
+function editAvatarHandler() {
   popupAvatarEdit.setTextSubmitButton('Сохранение...')
   api.updateAvatar(popupAvatarEdit.inputValue())
-  .then((res) => {
-    userInfo.setUserInfo(res)
-    popupAvatarEdit.close()
-  })
-  .then(() => {
-    popupAvatarEdit.setTextSubmitButton('Сохранить')
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+    .then((res) => {
+      userInfo.setUserInfo(res)
+    })
+    .then(() => {
+      popupAvatarEdit.close()
+    })
+    .then(() => {
+      popupAvatarEdit.setTextSubmitButton('Сохранить')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 buttonEditAvatar.addEventListener('click', openPopupAvatar)
 
-function openPopupAvatar () {
+function openPopupAvatar() {
   validatorFormAvatar.prevalidateForm()
   popupAvatarEdit.open()
 }
@@ -80,15 +82,18 @@ popupUserEdit.setEventListeners();
 function editUserInfoHandler() {
   popupUserEdit.setTextSubmitButton('Сохранение...')
   api.editUserInfo(popupUserEdit.inputValue())
-  .then((data) => {
-    userInfo.setUserInfo(data);
-  })
-  .then(() => {
-    popupUserEdit.setTextSubmitButton('Сохранение')
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    })
+    .then(() => {
+      popupUserEdit.close()
+    })
+    .then(() => {
+      popupUserEdit.setTextSubmitButton('Сохранение')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 // открытие попапа type_edit
@@ -194,13 +199,13 @@ function cardDeleteHandler(card) {
   const cardId = card.getCardId();
 
   api.deleteCard(cardId)
-  .then(() => {
-    card.delete();
-    popupDeleteCard.close();
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+    .then(() => {
+      card.delete();
+      popupDeleteCard.close();
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 // включение валидации //
@@ -219,43 +224,50 @@ const api = new Api({
   },
 });
 
-// изначальные карточки
-
-api
-  .getInitialCards()
-  .then((cards) => {
-    cardList.renderItems(cards.reverse());
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 // данные о пользователе
 let userId = null;
 
-api
+
+  const getInfo = api
   .getUserInfo()
   .then((data) => {
-    userInfo.setUserInfo(data);
     userId = data._id;
+    userInfo.setUserInfo(data);
   })
   .catch((err) => {
     console.log(err)
   })
+
+
+  // изначальные карточки
+
+Promise.all([getInfo])
+.then(() => {
+  api
+  .getInitialCards()
+  .then((cards) => {
+    cardList.renderItems(cards.reverse());
+  })
+})
 
 // новая карточка
 
 function addCardHandler(card) {
   popupCardAdd.setTextSubmitButton('Сохранение...')
   api.addCard(card)
-  .then((item) => {
-    cardList.addItem(createCard(item))
-  })
-  .then(() => {
-    popupCardAdd.setTextSubmitButton('Создать')
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+    .then((item) => {
+      cardList.addItem(createCard(item))
+    })
+    .then(() => {
+      popupCardAdd.close()
+    })
+    .then(() => {
+      popupCardAdd.setTextSubmitButton('Создать')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
+/// ПРОВЕРЯТЬ В КАКУЮ ВЕТКУ ЗАПУШЕНЫ ИЗМЕНЕНИЯ ПЕРЕД ОТПРАВКОЙ РАБОТЫ!!!!!

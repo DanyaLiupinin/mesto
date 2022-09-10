@@ -34,3 +34,4 @@ export const inputDescription = document.querySelector('.popup__input_content_de
 export const formAddCard = popupAdd.querySelector('.popup__form_type_add');
 export const formProfile = popupEdit.querySelector('.popup__form_type_edit');
 export const formAvatar = popupAvatar.querySelector('.popup__form_type_avatar')
+

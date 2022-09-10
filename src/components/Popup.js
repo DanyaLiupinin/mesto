@@ -1,29 +1,29 @@
 class Popup {
-    constructor (popupSelector) {
+    constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector)
         this._closeButton = this._popup.querySelector('.popup__close-button')
     }
 
-    open () {
+    open() {
         this._popup.classList.add('popup_opened');                                  // открываем попап
         document.addEventListener('keydown', this._handleEscClose)                 // слушатель нажатия на esc; закрытие попапа
     }
 
-    close () {
+    close() {
         this._popup.classList.remove('popup_opened')
         document.removeEventListener('keydown', this._handleEscClose)           // снимаем слушатель esc после закрытия попапа
     }
 
     _handleEscClose = (evt) => {                 // закрытие на esc
         if (evt.key === 'Escape') {
-          this.close() 
-            }
+            this.close()
+        }
     }
 
     _handleOverlayClose = (evt) => {            // закрытие на оверлей
         if (evt.target === evt.currentTarget) {
             this.close()
-    }
+        }
     }
 
     setEventListeners() {                      // слушатель клика по крестику и закрытие попапа
