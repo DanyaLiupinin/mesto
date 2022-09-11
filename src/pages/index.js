@@ -46,18 +46,18 @@ popupAvatarEdit.setEventListeners()
 
 function editAvatarHandler() {
   popupAvatarEdit.setTextSubmitButton('Сохранение...')
-  api.updateAvatar(popupAvatarEdit.inputValue())
+  api.updateAvatar(popupAvatarEdit.getInputValues())
     .then((res) => {
       userInfo.setUserInfo(res)
     })
     .then(() => {
       popupAvatarEdit.close()
     })
-    .then(() => {
-      popupAvatarEdit.setTextSubmitButton('Сохранить')
-    })
     .catch((err) => {
       console.log(err)
+    })
+    .finally(() => {
+      popupAvatarEdit.setTextSubmitButton('Сохранить')
     })
 }
 
@@ -81,18 +81,18 @@ popupUserEdit.setEventListeners();
 
 function editUserInfoHandler() {
   popupUserEdit.setTextSubmitButton('Сохранение...')
-  api.editUserInfo(popupUserEdit.inputValue())
+  api.editUserInfo(popupUserEdit.getInputValues())
     .then((data) => {
       userInfo.setUserInfo(data);
     })
     .then(() => {
       popupUserEdit.close()
     })
-    .then(() => {
-      popupUserEdit.setTextSubmitButton('Сохранение')
-    })
     .catch((err) => {
       console.log(err)
+    })
+    .finally(() => {
+      popupUserEdit.setTextSubmitButton('Сохранение')
     })
 }
 
@@ -225,31 +225,19 @@ const api = new Api({
 });
 
 
-// данные о пользователе
+// данные о пользователе + карточки 
+
 let userId = null;
 
-
-  const getInfo = api
-  .getUserInfo()
-  .then((data) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, cards]) => {
     userId = data._id;
     userInfo.setUserInfo(data);
+    cardList.renderItems(cards.reverse());
   })
   .catch((err) => {
     console.log(err)
   })
-
-
-  // изначальные карточки
-
-Promise.all([getInfo])
-.then(() => {
-  api
-  .getInitialCards()
-  .then((cards) => {
-    cardList.renderItems(cards.reverse());
-  })
-})
 
 // новая карточка
 
@@ -262,12 +250,13 @@ function addCardHandler(card) {
     .then(() => {
       popupCardAdd.close()
     })
-    .then(() => {
-      popupCardAdd.setTextSubmitButton('Создать')
-    })
     .catch((err) => {
       console.log(err)
+    })
+    .finally(() => {
+      popupCardAdd.setTextSubmitButton('Создать')
     })
 }
 
 /// ПРОВЕРЯТЬ В КАКУЮ ВЕТКУ ЗАПУШЕНЫ ИЗМЕНЕНИЯ ПЕРЕД ОТПРАВКОЙ РАБОТЫ!!!!!
+

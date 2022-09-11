@@ -9,17 +9,13 @@ class PopupWithForm extends Popup {
         this._getData = dataGetter
     }
 
-    _getInputValues() {
+    getInputValues() {
         this._formValues = {}
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value
         }
         )
         return this._formValues
-    }
-
-    inputValue() {
-        return this._getInputValues()
     }
 
     setEventListeners = () => {
@@ -30,7 +26,7 @@ class PopupWithForm extends Popup {
 
             evt.preventDefault() //отмена стандартного поведения при сабмите
 
-            this._handleFormSubmit(this._getInputValues()) // отправляем в функцию сабмита собранные в инпутах данные
+            this._handleFormSubmit(this.getInputValues()) // отправляем в функцию сабмита собранные в инпутах данные
 
         })
     }
