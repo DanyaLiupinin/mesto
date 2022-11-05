@@ -1,19 +1,19 @@
-# Проект: Место
+# Project: Mesto
 
-## Описание проекта
-Проект представляет из себя подобие профиля в социальной сети, основной функцией которой является хранение фотографий. На данный момент пользователь имеет возможность:
-- изменять имя 
-- указывать профессию
-- изменять аватар
-- загружать и удалять фотографии
-- ставить лайки
+## Project description:
+The project is a kind of profile in a social network, the main function of which is to share photos. At the moment, the user has the ability to:
+- change the name 
+- specify the profession
+- change the avatar
+- upload and delete photos
+- like photos / delete likes
 
-Также в приложении реализованы: 
+The application also implements: 
 
-- валидация форм
-- защита от случайного удаления картинок (всплывающее при удалении окно)
+- form validation
+- protection against accidental deletion of images (pop-up window when deleting)
 
-## Технологии:
+## Technologies:
 - HTML
 - CSS
 - JavaScript
@@ -23,6 +23,6 @@
 - Flex and Grid layout
 - Cross-browser layout 
 
-## Ссылка на проект ##
+## Link ##
 https://danyaliupinin.github.io/mesto/
 
