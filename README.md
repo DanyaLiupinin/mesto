@@ -23,6 +23,12 @@ The application also implements:
 - Flex and Grid layout
 - Cross-browser layout 
 
+## Working with the project:
+
+clone repository:
+
+``` git clone https://github.com/DanyaLiupinin/mesto.git ```
+
 ## Link ##
 https://danyaliupinin.github.io/mesto/
 
