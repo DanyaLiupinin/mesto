@@ -25,7 +25,7 @@ The application also implements:
 
 ## Working with the project:
 
-clone repository:
+Clone repository:
 
 ``` git clone https://github.com/DanyaLiupinin/mesto.git ```
 
